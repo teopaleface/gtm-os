@@ -1,6 +1,6 @@
 # T-005 Public release
 
-status: ready
+status: done
 priority: P1
 playbook: gtm-campaign-ops
 blockers: [T-004]

@@ -1,6 +1,6 @@
 # T-004 Public docs and demo page
 
-status: in_progress
+status: done
 priority: P1
 playbook: gtm-content
 blockers: [T-003]
