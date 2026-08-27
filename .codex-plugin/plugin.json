@@ -5,6 +5,10 @@
   "author": {
     "name": "GTM OS contributors"
   },
+  "homepage": "https://gtm-os.ishi-8634.chatgpt.site",
+  "repository": "https://github.com/teopaleface/gtm-os",
+  "license": "MIT",
+  "keywords": ["gtm", "go-to-market", "market-research", "growth", "sales"],
   "skills": "./skills/",
   "interface": {
     "displayName": "GTM OS",
@@ -13,6 +17,9 @@
     "developerName": "GTM OS contributors",
     "category": "Productivity",
     "capabilities": ["go-to-market strategy", "market research", "sales and growth planning"],
-    "defaultPrompt": "Help me turn this go-to-market problem into a clear, evidence-backed plan."
+    "defaultPrompt": "Help me turn this go-to-market problem into a clear, evidence-backed plan.",
+    "websiteURL": "https://gtm-os.ishi-8634.chatgpt.site",
+    "privacyPolicyURL": "https://gtm-os.ishi-8634.chatgpt.site/privacy",
+    "termsOfServiceURL": "https://gtm-os.ishi-8634.chatgpt.site/terms"
   }
 }
