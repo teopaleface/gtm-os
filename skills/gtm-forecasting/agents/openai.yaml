@@ -1,0 +1,5 @@
+interface:
+  display_name: "Forecasting"
+  short_description: "Model demand with assumptions"
+policy:
+  allow_implicit_invocation: false

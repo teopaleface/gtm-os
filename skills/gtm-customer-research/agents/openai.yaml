@@ -1,0 +1,5 @@
+interface:
+  display_name: "Customer research"
+  short_description: "Reduce one GTM uncertainty"
+policy:
+  allow_implicit_invocation: false

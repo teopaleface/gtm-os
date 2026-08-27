@@ -1,0 +1,5 @@
+interface:
+  display_name: "Customer success"
+  short_description: "Plan around customer outcomes"
+policy:
+  allow_implicit_invocation: false

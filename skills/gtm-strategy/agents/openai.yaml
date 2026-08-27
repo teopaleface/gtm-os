@@ -1,0 +1,5 @@
+interface:
+  display_name: "GTM strategy"
+  short_description: "Choose the next GTM bets"
+policy:
+  allow_implicit_invocation: false

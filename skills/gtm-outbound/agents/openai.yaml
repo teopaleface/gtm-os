@@ -1,0 +1,5 @@
+interface:
+  display_name: "Outbound"
+  short_description: "Draft relevant outreach"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Competitive intelligence"
+  short_description: "Compare buyer alternatives"
+policy:
+  allow_implicit_invocation: false

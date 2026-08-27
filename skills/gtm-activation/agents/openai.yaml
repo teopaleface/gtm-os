@@ -1,0 +1,5 @@
+interface:
+  display_name: "Activation"
+  short_description: "Improve early product value"
+policy:
+  allow_implicit_invocation: false

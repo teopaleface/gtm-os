@@ -1,0 +1,5 @@
+interface:
+  display_name: "Market research"
+  short_description: "Research one market decision"
+policy:
+  allow_implicit_invocation: false

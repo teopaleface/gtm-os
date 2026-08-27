@@ -1,0 +1,5 @@
+interface:
+  display_name: "Pricing and packaging"
+  short_description: "Explore a testable offer"
+policy:
+  allow_implicit_invocation: false

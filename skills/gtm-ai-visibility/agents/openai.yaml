@@ -1,0 +1,5 @@
+interface:
+  display_name: "AI search visibility"
+  short_description: "Audit buyer-facing AI answers"
+policy:
+  allow_implicit_invocation: false

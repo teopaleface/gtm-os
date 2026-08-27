@@ -1,0 +1,5 @@
+interface:
+  display_name: "Onboarding"
+  short_description: "Design the first value path"
+policy:
+  allow_implicit_invocation: false

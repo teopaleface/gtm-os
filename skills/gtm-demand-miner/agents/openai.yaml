@@ -1,0 +1,5 @@
+interface:
+  display_name: "Demand miner"
+  short_description: "Find visible buyer demand"
+policy:
+  allow_implicit_invocation: false

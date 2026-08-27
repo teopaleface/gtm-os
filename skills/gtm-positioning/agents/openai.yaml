@@ -1,0 +1,5 @@
+interface:
+  display_name: "Positioning"
+  short_description: "Choose a defensible position"
+policy:
+  allow_implicit_invocation: false

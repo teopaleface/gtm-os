@@ -1,0 +1,5 @@
+interface:
+  display_name: "Community-led growth"
+  short_description: "Plan useful participation"
+policy:
+  allow_implicit_invocation: false

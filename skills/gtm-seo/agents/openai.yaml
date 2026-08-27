@@ -1,0 +1,5 @@
+interface:
+  display_name: "Search demand"
+  short_description: "Find high-fit search work"
+policy:
+  allow_implicit_invocation: false

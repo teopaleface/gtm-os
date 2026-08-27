@@ -1,0 +1,5 @@
+interface:
+  display_name: "Product-led growth"
+  short_description: "Map the product growth loop"
+policy:
+  allow_implicit_invocation: false

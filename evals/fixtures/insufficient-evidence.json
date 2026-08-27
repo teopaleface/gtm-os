@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "request_id": "weak-market-question",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "decision": {
+    "question": "Should this product target freelancers first?",
+    "answer": "There is not enough independent evidence to choose freelancers over other segments.",
+    "confidence": 0.28
+  },
+  "context": {
+    "product": "A workflow automation tool.",
+    "market": "Unknown.",
+    "knowns": ["The product automates a repeated workflow."],
+    "assumptions": ["Freelancers may feel the workflow pain."],
+    "unknowns": ["Problem frequency, buyer, willingness to pay, and reachable channel."]
+  },
+  "tickets": [
+    {
+      "id": "T-001",
+      "title": "Collect independent evidence from candidate users",
+      "stage": "Audience",
+      "playbook": "gtm-customer-research",
+      "priority": "P0",
+      "status": "ready",
+      "blockers": [],
+      "evidence_needed": "Two independent sources or interviews about the same workflow problem.",
+      "acceptance_criteria": [
+        "Compare at least two candidate segments.",
+        "Record the source and date for each material fact.",
+        "Return a ranked recommendation or keep the status insufficient."
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "ICP",
+      "title": "Unresolved first segment",
+      "summary": "Freelancers are a hypothesis that needs validation.",
+      "claims": [
+        {
+          "claim": "Freelancers are the best first audience.",
+          "kind": "hypothesis",
+          "supporting_evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-001",
+      "source_type": "discussion",
+      "url": "https://example.com/fixture/one-discussion",
+      "accessed_at": "2026-08-28",
+      "excerpt": "One person says the workflow takes too much time.",
+      "supports": ["one person reports workflow friction"],
+      "independence_key": "example.com"
+    }
+  ],
+  "scores": {
+    "evidence_quality": 2.0,
+    "decision_readiness": 2.0,
+    "actionability": 3.0,
+    "completeness": 3.0,
+    "overall": 2.4
+  },
+  "next_actions": ["Interview or survey users from at least two candidate segments."],
+  "human_decisions": ["Choose the segment access plan for the next research run."]
+}

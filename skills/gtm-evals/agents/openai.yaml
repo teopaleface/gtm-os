@@ -1,0 +1,5 @@
+interface:
+  display_name: "GTM evals"
+  short_description: "Check output quality"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Account-based marketing"
+  short_description: "Prioritize named accounts"
+policy:
+  allow_implicit_invocation: false

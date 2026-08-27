@@ -1,0 +1,5 @@
+interface:
+  display_name: "ICP discovery"
+  short_description: "Find the first audience"
+policy:
+  allow_implicit_invocation: false

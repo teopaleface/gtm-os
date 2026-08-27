@@ -1,0 +1,5 @@
+interface:
+  display_name: "Referrals"
+  short_description: "Design a value-led referral test"
+policy:
+  allow_implicit_invocation: false

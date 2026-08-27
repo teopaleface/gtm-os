@@ -1,0 +1,5 @@
+interface:
+  display_name: "Attribution"
+  short_description: "Make channel reporting honest"
+policy:
+  allow_implicit_invocation: false

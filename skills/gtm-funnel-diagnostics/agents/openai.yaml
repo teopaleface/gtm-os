@@ -1,0 +1,5 @@
+interface:
+  display_name: "Funnel diagnostics"
+  short_description: "Find the measured bottleneck"
+policy:
+  allow_implicit_invocation: false

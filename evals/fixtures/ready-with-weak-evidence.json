@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "request_id": "weak-ready-output",
+  "status": "READY",
+  "decision": {
+    "question": "Which audience should we choose?",
+    "answer": "Choose this audience with confidence.",
+    "confidence": 0.9
+  },
+  "context": {
+    "product": "Test product",
+    "market": "Test market",
+    "knowns": ["A product exists."],
+    "assumptions": ["The audience has the problem."],
+    "unknowns": []
+  },
+  "tickets": [
+    {
+      "id": "T-001",
+      "title": "Confirm the audience",
+      "stage": "Audience",
+      "playbook": "gtm-icp",
+      "priority": "P0",
+      "status": "done",
+      "blockers": [],
+      "evidence_needed": "Independent evidence of the problem.",
+      "acceptance_criteria": ["Confirm the audience with independent evidence."]
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "ICP",
+      "title": "Overconfident audience",
+      "summary": "This output should not be ready.",
+      "claims": [
+        {
+          "claim": "The audience is the right first market.",
+          "kind": "interpretation",
+          "supporting_evidence_ids": ["E-001"]
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-001",
+      "source_type": "discussion",
+      "url": "https://example.com/fixture/one-source",
+      "accessed_at": "2026-08-28",
+      "excerpt": "One person mentions a related problem.",
+      "supports": ["one person mentions a related problem"],
+      "independence_key": "example.com"
+    }
+  ],
+  "scores": {
+    "evidence_quality": 2.0,
+    "decision_readiness": 2.0,
+    "actionability": 3.0,
+    "completeness": 3.0,
+    "overall": 2.4
+  },
+  "next_actions": ["Collect independent evidence."],
+  "human_decisions": ["Decide whether to run another research pass."]
+}

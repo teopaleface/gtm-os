@@ -1,0 +1,5 @@
+interface:
+  display_name: "Retention"
+  short_description: "Find customer value levers"
+policy:
+  allow_implicit_invocation: false

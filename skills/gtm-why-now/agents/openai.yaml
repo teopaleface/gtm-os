@@ -1,0 +1,5 @@
+interface:
+  display_name: "Why now"
+  short_description: "Find timely market signals"
+policy:
+  allow_implicit_invocation: false

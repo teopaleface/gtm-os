@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sales enablement"
+  short_description: "Create sales decision aids"
+policy:
+  allow_implicit_invocation: false

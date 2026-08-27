@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "request_id": "invoice-spv-first-audience",
+  "status": "READY",
+  "decision": {
+    "question": "Which first audience should we test for invoice automation?",
+    "answer": "Start with Romanian accounting firms serving micro-businesses, then validate the workflow with one partner-led pilot.",
+    "confidence": 0.76
+  },
+  "context": {
+    "product": "An app that imports invoices from different sources and submits them to a person's Romanian SPV.",
+    "market": "Romania, invoice administration for micro-businesses and their accounting partners.",
+    "knowns": [
+      "The product removes repeated invoice intake and submission steps."
+    ],
+    "assumptions": [
+      "Accounting firms feel the workflow pain across several clients."
+    ],
+    "unknowns": [
+      "Who owns the purchase decision inside the firm?",
+      "Which integration or compliance concern could stop a pilot?"
+    ]
+  },
+  "tickets": [
+    {
+      "id": "T-001",
+      "title": "Validate the repeated invoice workflow with accounting firms",
+      "stage": "Audience",
+      "playbook": "gtm-customer-research",
+      "priority": "P0",
+      "status": "done",
+      "blockers": [],
+      "evidence_needed": "Evidence that the workflow repeats, hurts, and has an identifiable buyer.",
+      "acceptance_criteria": [
+        "Name one segment and one likely buyer role.",
+        "Cite two independent sources or mark the result insufficient.",
+        "State the next validation action."
+      ]
+    },
+    {
+      "id": "T-002",
+      "title": "Choose a positioning angle for the first audience",
+      "stage": "Message",
+      "playbook": "gtm-positioning",
+      "priority": "P1",
+      "status": "blocked",
+      "blockers": ["T-001"],
+      "evidence_needed": "Proof that the chosen audience values fewer manual invoice steps.",
+      "acceptance_criteria": [
+        "Write one positioning choice and one excluded alternative.",
+        "Label unsupported differentiation as a hypothesis.",
+        "Define one message test."
+      ]
+    },
+    {
+      "id": "T-003",
+      "title": "Check one competitor promise against customer experience",
+      "stage": "Market",
+      "playbook": "gtm-proofgap",
+      "priority": "P1",
+      "status": "ready",
+      "blockers": ["T-001"],
+      "evidence_needed": "One first-party promise and two independent experiences about the same promise.",
+      "acceptance_criteria": [
+        "Capture the exact promise and source.",
+        "Use at least two independent customer sources for a possible gap.",
+        "Write a careful sales question, not an accusation."
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "ICP",
+      "title": "First audience hypothesis",
+      "summary": "Accounting firms serving micro-businesses are a promising first segment because one workflow may repeat across many clients.",
+      "claims": [
+        {
+          "claim": "Public job language in the fixture describes recurring invoice handling as part of an accounting role.",
+          "kind": "fact",
+          "supporting_evidence_ids": ["E-001"]
+        },
+        {
+          "claim": "A partner-led pilot could test repeated value faster than selling one small business at a time.",
+          "kind": "interpretation",
+          "supporting_evidence_ids": ["E-001", "E-002"]
+        },
+        {
+          "claim": "The firm owner or operations lead will be the first buyer.",
+          "kind": "hypothesis",
+          "supporting_evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-001",
+      "source_type": "job_post",
+      "url": "https://example.com/fixture/accounting-role",
+      "accessed_at": "2026-08-28",
+      "excerpt": "The role handles recurring invoice collection, checks, and client follow-up.",
+      "supports": ["recurring invoice work appears in the target workflow"],
+      "independence_key": "example.com"
+    },
+    {
+      "id": "E-002",
+      "source_type": "customer_review",
+      "url": "https://example.org/fixture/accounting-review",
+      "accessed_at": "2026-08-28",
+      "excerpt": "We still reconcile invoices manually when files arrive through different channels.",
+      "supports": ["multiple invoice sources create manual reconciliation friction"],
+      "independence_key": "example.org"
+    }
+  ],
+  "scores": {
+    "evidence_quality": 4.0,
+    "decision_readiness": 4.0,
+    "actionability": 4.0,
+    "completeness": 4.0,
+    "overall": 4.0
+  },
+  "next_actions": [
+    "Interview three accounting firms and ask them to walk through the last invoice exception.",
+    "Use the interview results to unblock T-002."
+  ],
+  "human_decisions": [
+    "Approve the accounting-firm segment as the first discovery focus.",
+    "Approve access to any internal product or pilot data before making a public claim."
+  ]
+}

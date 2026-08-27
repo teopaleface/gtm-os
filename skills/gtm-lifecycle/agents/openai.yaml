@@ -1,0 +1,5 @@
+interface:
+  display_name: "Lifecycle marketing"
+  short_description: "Design stage-aware messages"
+policy:
+  allow_implicit_invocation: false

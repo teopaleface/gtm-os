@@ -1,0 +1,5 @@
+interface:
+  display_name: "Content strategy"
+  short_description: "Turn research into content angles"
+policy:
+  allow_implicit_invocation: false

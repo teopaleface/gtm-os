@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "request_id": "bad-source",
+  "status": "READY",
+  "decision": {
+    "question": "Can we trust this claim?",
+    "answer": "The claim is ready to use.",
+    "confidence": 0.8
+  },
+  "context": {
+    "product": "Test product",
+    "market": "Test market",
+    "knowns": ["A product exists."],
+    "assumptions": [],
+    "unknowns": []
+  },
+  "tickets": [
+    {
+      "id": "T-001",
+      "title": "Review the source",
+      "stage": "Market",
+      "playbook": "gtm-market-research",
+      "priority": "P0",
+      "status": "ready",
+      "blockers": [],
+      "evidence_needed": "A valid source.",
+      "acceptance_criteria": ["Open and verify the source."]
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "OTHER",
+      "title": "Claim review",
+      "summary": "The source should not pass validation.",
+      "claims": [
+        {
+          "claim": "The source supports this fact.",
+          "kind": "fact",
+          "supporting_evidence_ids": ["E-001"]
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-001",
+      "source_type": "official",
+      "url": "not-a-url",
+      "accessed_at": "2026-08-28",
+      "excerpt": "A source excerpt.",
+      "supports": ["the claim"],
+      "independence_key": "bad-source"
+    }
+  ],
+  "scores": {
+    "evidence_quality": 4.0,
+    "decision_readiness": 4.0,
+    "actionability": 4.0,
+    "completeness": 4.0,
+    "overall": 4.0
+  },
+  "next_actions": ["Verify the source."],
+  "human_decisions": []
+}

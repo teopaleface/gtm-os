@@ -1,0 +1,5 @@
+interface:
+  display_name: "Churn signals"
+  short_description: "Review customer risk signals"
+policy:
+  allow_implicit_invocation: false

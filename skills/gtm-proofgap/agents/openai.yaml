@@ -1,0 +1,5 @@
+interface:
+  display_name: "Proof gap"
+  short_description: "Test competitor promises"
+policy:
+  allow_implicit_invocation: false

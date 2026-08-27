@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "request_id": "uncited-fact",
+  "status": "NEEDS_INPUT",
+  "decision": {
+    "question": "What is the buyer problem?",
+    "answer": "The source material is not enough to answer it.",
+    "confidence": 0.2
+  },
+  "context": {
+    "product": "Test product",
+    "market": "Test market",
+    "knowns": ["A product exists."],
+    "assumptions": [],
+    "unknowns": ["The buyer problem."]
+  },
+  "tickets": [
+    {
+      "id": "T-001",
+      "title": "Supply buyer evidence",
+      "stage": "Audience",
+      "playbook": "gtm-customer-research",
+      "priority": "P0",
+      "status": "blocked",
+      "blockers": [],
+      "evidence_needed": "A source or interview about the buyer problem.",
+      "acceptance_criteria": ["Attach one auditable source."]
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "ICP",
+      "title": "Uncited claim",
+      "summary": "This output should fail because a fact has no source.",
+      "claims": [
+        {
+          "claim": "Buyers lose three hours per week.",
+          "kind": "fact",
+          "supporting_evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "evidence": [],
+  "scores": {
+    "evidence_quality": 0.0,
+    "decision_readiness": 1.0,
+    "actionability": 2.0,
+    "completeness": 2.0,
+    "overall": 1.1
+  },
+  "next_actions": ["Collect the missing evidence."],
+  "human_decisions": ["Provide access to customer research."]
+}

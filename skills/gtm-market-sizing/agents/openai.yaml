@@ -1,0 +1,5 @@
+interface:
+  display_name: "Market sizing"
+  short_description: "Build a transparent estimate"
+policy:
+  allow_implicit_invocation: false

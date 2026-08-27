@@ -1,0 +1,5 @@
+interface:
+  display_name: "GTM analytics"
+  short_description: "Define decision-ready metrics"
+policy:
+  allow_implicit_invocation: false

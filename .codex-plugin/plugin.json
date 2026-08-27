@@ -1,0 +1,18 @@
+{
+  "name": "gtm-os",
+  "version": "0.1.0",
+  "description": "Evidence-backed go-to-market workflows from product context to prioritized action.",
+  "author": {
+    "name": "GTM OS contributors"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "GTM OS",
+    "shortDescription": "Turn GTM questions into evidence-backed work.",
+    "longDescription": "GTM OS routes go-to-market questions from intake through research, decisions, action tickets, and evaluation.",
+    "developerName": "GTM OS contributors",
+    "category": "Productivity",
+    "capabilities": ["go-to-market strategy", "market research", "sales and growth planning"],
+    "defaultPrompt": "Help me turn this go-to-market problem into a clear, evidence-backed plan."
+  }
+}

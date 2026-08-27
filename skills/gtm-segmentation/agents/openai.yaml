@@ -1,0 +1,5 @@
+interface:
+  display_name: "Segmentation"
+  short_description: "Choose a focus segment"
+policy:
+  allow_implicit_invocation: false

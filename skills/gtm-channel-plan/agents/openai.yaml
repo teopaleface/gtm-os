@@ -1,0 +1,5 @@
+interface:
+  display_name: "Channel plan"
+  short_description: "Choose the next channel test"
+policy:
+  allow_implicit_invocation: false

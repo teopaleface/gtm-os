@@ -1,0 +1,5 @@
+interface:
+  display_name: "GTM experiment"
+  short_description: "Turn uncertainty into a test"
+policy:
+  allow_implicit_invocation: false

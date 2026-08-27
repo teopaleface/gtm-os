@@ -1,0 +1,5 @@
+interface:
+  display_name: "Messaging"
+  short_description: "Build a message map"
+policy:
+  allow_implicit_invocation: false

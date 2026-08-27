@@ -1,0 +1,5 @@
+interface:
+  display_name: "Campaign operations"
+  short_description: "Make execution inspectable"
+policy:
+  allow_implicit_invocation: false

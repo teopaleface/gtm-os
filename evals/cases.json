@@ -1,0 +1,46 @@
+[
+  {
+    "id": "positive-valid-contract",
+    "fixture": "valid-output.json",
+    "expect": "pass",
+    "assert": { "all_facts_cited": true }
+  },
+  {
+    "id": "positive-evidence-abstention",
+    "fixture": "insufficient-evidence.json",
+    "expect": "pass",
+    "assert": { "status": "INSUFFICIENT_EVIDENCE" }
+  },
+  {
+    "id": "positive-ticket-blockers",
+    "fixture": "valid-output.json",
+    "expect": "pass",
+    "assert": { "has_blocked_ticket": true }
+  },
+  {
+    "id": "positive-score-consistency",
+    "fixture": "valid-output.json",
+    "expect": "pass",
+    "assert": { "score_consistent": true }
+  },
+  {
+    "id": "positive-structured-handoff",
+    "fixture": "valid-output.json",
+    "expect": "pass"
+  },
+  {
+    "id": "negative-invented-citation",
+    "fixture": "invalid-citation.json",
+    "expect": "fail"
+  },
+  {
+    "id": "negative-uncited-fact",
+    "fixture": "missing-fact-source.json",
+    "expect": "fail"
+  },
+  {
+    "id": "negative-ready-with-weak-evidence",
+    "fixture": "ready-with-weak-evidence.json",
+    "expect": "fail"
+  }
+]
