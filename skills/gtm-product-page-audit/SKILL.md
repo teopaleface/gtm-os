@@ -98,11 +98,16 @@ separate writing skill is installed.
 - Use concrete facts, short paragraphs, and a natural rhythm. Prefer "is" and
   "has" over inflated phrasing.
 - Remove hype, generic filler, chatbot phrases, decorative emojis, em dashes,
-  title-case headings, and claims about impact that the evidence cannot support.
+  title-case headings, curly quotes in ordinary prose, and claims about impact
+  that the evidence cannot support. Keep a source quote exact only when its
+  wording is the evidence.
 - Separate what the page says from what you conclude. Mark interpretations and
   hypotheses in ordinary language instead of presenting them as facts.
 - Keep the report concise enough to read in one minute. Include only the
-  strongest facts, up to three fixes, and the important unknowns.
+  strongest facts, the score and what it means when available, up to three
+  fixes, and the important unknowns.
+- If a numeric score is available, use the same rounded overall and category
+  values as the agent audit. If it is `UNSCORABLE`, say that plainly.
 
 Use this shape, adapting the wording to the evidence:
 

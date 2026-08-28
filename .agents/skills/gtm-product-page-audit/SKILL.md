@@ -73,9 +73,9 @@ the requested decision.
    markup. Use the supplied Google guidance as the rubric. Treat structured data
    as an eligibility aid, never as a ranking or display guarantee.
 6. Score the observed page with the rubric below. Return the overall score or
-   `UNSCORABLE`, audit coverage, category scores, criterion ratings, and any
-   critical blockers. Keep unknown criteria out of quality points, but count
-   them in coverage.
+   `UNSCORABLE`, audit coverage, category scores with category coverage,
+   criterion ratings, and any critical blockers. Keep unknown criteria out of
+   quality points, but count them in coverage.
 7. Return at most three prioritized changes. A change includes the issue,
    recommendation, evidence, observable success signal, and effort or
    dependency. If the evidence cannot support three changes, return fewer and
@@ -97,12 +97,16 @@ separate writing skill is installed.
 - Use concrete facts, short paragraphs, and a natural rhythm. Prefer "is" and
   "has" over inflated phrasing.
 - Remove hype, generic filler, chatbot phrases, decorative emojis, em dashes,
-  title-case headings, and claims about impact that the evidence cannot support.
+  title-case headings, curly quotes in ordinary prose, and claims about impact
+  that the evidence cannot support. Keep a source quote exact only when its
+  wording is the evidence.
 - Separate what the page says from what you conclude. Mark interpretations and
   hypotheses in ordinary language instead of presenting them as facts.
 - Keep the report concise enough to read in one minute. Include only the
   strongest facts, the score and what it means when available, up to three
   fixes, and the important unknowns.
+- If a numeric score is available, use the same rounded overall and category
+  values as the agent audit. If it is `UNSCORABLE`, say that plainly.
 
 Use this shape, adapting the wording to the evidence:
 
@@ -144,7 +148,8 @@ Calculate audit coverage as assessed applicable weight divided by total
 applicable weight. If coverage is below 50%, report `UNSCORABLE` and name the
 cheapest observations needed. Mark a numeric score `provisional` below 80%
 coverage. Use these bands: 90-100 Excellent, 75-89 Strong, 60-74 Mixed,
-40-59 Weak, and 0-39 Critical.
+40-59 Weak, and 0-39 Critical. Round the overall and category scores to whole
+numbers before writing either output.
 
 Use these category weights and inspect the listed dimensions:
 
@@ -156,11 +161,12 @@ Use these category weights and inspect the listed dimensions:
 | GEO and AI answer readiness | 15 | factual answerability, entity clarity, provenance, buyer questions, consistency |
 | UX, accessibility, and performance | 15 | mobile path, interactions, accessibility, media, speed/stability |
 
-Explain criterion ratings in the agent audit. Cite an observation for every
-rating below 2 and every rating of 4. Name critical blockers separately. A
-critical blocker keeps the readiness decision negative even when the arithmetic
-score is high. SEO and GEO scores assess eligibility and answerability, not
-ranking, rich results, citations, or sales.
+In the agent audit, show each category's weight, quality score, coverage, and
+main finding, followed by the criterion ratings and short evidence notes. Cite
+an observation for every rating below 2 and every rating of 4. Name critical
+blockers separately. A critical blocker keeps the readiness decision negative
+even when the arithmetic score is high. SEO and GEO scores assess eligibility
+and answerability, not ranking, rich results, citations, or sales.
 
 ## Agent audit
 

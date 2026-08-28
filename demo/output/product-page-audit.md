@@ -1,7 +1,7 @@
 ## Status
 INSUFFICIENT_EVIDENCE. The snapshot supports a bounded product-page audit, not a complete traffic-readiness decision. Availability and performance evidence need another check.
 ## Page score
-Overall: `UNSCORABLE`; audit coverage: 47%, below the 50% threshold. Category quality where observable: conversion clarity 51%, purchase confidence 25%, GEO answer readiness 47%. SEO discovery and UX/accessibility/performance are unobserved. Criterion notes: conversion offer 2/4, product detail 3/4, CTA/state 1/4; purchase price/availability 1/4, shipping 1/4, returns/warranty 1/4; GEO answerability 2/4, entity clarity 3/4, provenance 1/4, buyer questions 2/4, consistency 1/4. Critical blocker: the selected variant renders `Sale Out of Stock`.
+Overall: `UNSCORABLE`; audit coverage: 47%, below the 50% threshold. Category quality where observable: conversion clarity 51% (coverage 63%), purchase confidence 25% (coverage 65%), GEO answer readiness 47% (coverage 100%). SEO discovery and UX/accessibility/performance are unobserved. Criterion notes: conversion offer 2/4, product detail 3/4, CTA/state 1/4; purchase price/availability 1/4, shipping 1/4, returns/warranty 1/4; GEO answerability 2/4, entity clarity 3/4, provenance 1/4, buyer questions 2/4, consistency 1/4. Critical blocker: the selected variant renders `Sale Out of Stock`.
 ## Scope
 Target URL: <https://www.skullcandy.eu/products/crusher-anc-2-sensory-bass-headphones-with-active-noise-canceling?variant=55468437930361> | Product: Skullcandy Crusher® ANC 2, Hazard | Audience: over-ear headphone shoppers | Query: best noise-canceling headphones with bass | Accessed: 2026-08-28
 ## Decision
