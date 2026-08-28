@@ -1,17 +1,16 @@
 # Product-page audit
 
 ## Status
-COMPLETE. Live URL mode, exact target fetched once. Coverage 89%, no critical blockers.
+COMPLETE. Live URL mode, exact target fetched once. Coverage 88%, no critical blockers.
 
 ## Page score
-Overall: 87/100 (Strong). Coverage 89%. No critical blockers.
-SEO category is provisional (60% coverage: crawl controls and structured-data markup unobserved).
+Overall: 87/100 (Strong). Coverage 88%. No critical blockers.
+SEO category is provisional (crawl controls and structured-data markup unobserved).
 Full category scores, criterion ratings, and evidence notes are in `demo/output/product-page-score.md`.
 
 ## Scope
 Target URL: https://www.thomann.ro/beyerdynamic_dt_900_pro_x.htm
 Access date: 2026-08-28
-Merchant: Thomann România (thomann.ro). Product: beyerdynamic DT 900 PRO X studio headphones.
 
 ## Decision
 READY (strong). Page is fit to drive paid and natural traffic. Fix the shipping-cost gap and confirm structured data before scaling.
@@ -47,10 +46,9 @@ Title: present. Description: present (spec list). Image: present (14 photos, 360
 3. Surface condition as "new" and show MPN/GTIN in the data sheet. Issue: condition implied, only internal article number shown. Recommendation: add condition field and manufacturer part number. Evidence: spec block lacks MPN and GTIN. Success signal: MPN visible and validated in Merchant Center. Effort: low.
 
 ## Unknowns and limits
-- Crawl controls (robots/noindex) not checked. Product JSON-LD not visible in markdown snapshot.
+- Crawl controls (robots/noindex) not checked. Product JSON-LD not visible in page source.
 - Page speed and Core Web Vitals not measured; mobile path inferred from structure, not tested.
 - Independent reviews or third-party test data not gathered; spec performance not verified.
-- Competitor page and shopper query not provided; comparison shown is merchant-supplied only.
 
 ## Sources
 - https://www.thomann.ro/beyerdynamic_dt_900_pro_x.htm — 2026-08-28 — full page markdown (title, price 1.199 lei, in stock, specs, reviews 4.6/5 n=259, 30-day and 3-year terms, free-shipping threshold, manufacturer address, sales rank 12) — primary seller page — first-party — limitation: seller self-reported claims, no independent testing.

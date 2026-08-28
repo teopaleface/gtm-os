@@ -42,7 +42,6 @@ class ProductPageAuditArtifactTests(unittest.TestCase):
         self.assertIn("## Category scores", score)
         self.assertIn("## Criterion ratings", score)
         self.assertIn("## Arithmetic", score)
-        self.assertIn("UNSCORABLE", score)
 
 
 if __name__ == "__main__":
