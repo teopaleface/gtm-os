@@ -12,8 +12,8 @@ page. Every run creates three separate outputs:
    decision;
 2. a structured audit for a downstream agent that needs evidence, limits, and
    implementation-ready changes.
-3. a full score report with the category table, criterion ratings, evidence
-   notes, and reproducible arithmetic.
+3. a full score report with the category scores, criterion ratings, and
+   evidence notes.
 
 The three files are different deliverables. The human report explains the
 result without machine-shaped tables. The agent audit preserves the evidence
@@ -83,7 +83,7 @@ the requested decision.
 6. Score the observed page with the rubric below. Put the overall score or
    `UNSCORABLE`, audit coverage, provisional or unscorable label, and critical
    blockers in the agent audit. Put the category scores, category coverage,
-   criterion ratings, evidence notes, and arithmetic in the score report. Keep
+   criterion ratings, evidence notes in the score report. Keep
    unknown criteria out of quality points, but count them in coverage.
 7. Return at most three prioritized changes. A change includes the issue,
    recommendation, evidence, observable success signal, and effort or
@@ -163,44 +163,27 @@ coverage. Use these bands: 90-100 Excellent, 75-89 Strong, 60-74 Mixed,
 40-59 Weak, and 0-39 Critical. Round the overall and category scores to whole
 numbers before writing either output.
 
-Use these category and criterion weights. Do not invent equal weights when a
-criterion is not listed:
+Use these category weights and inspect the listed dimensions (no table; this
+is a reference list for the scorer):
 
-| Category | Weight | Criterion | Criterion weight |
-|---|---:|---|---:|
-| Conversion clarity and persuasion | 30 | offer and audience clarity | 6 |
-| Conversion clarity and persuasion | 30 | product detail and benefit specificity | 7 |
-| Conversion clarity and persuasion | 30 | CTA and option selection | 6 |
-| Conversion clarity and persuasion | 30 | objection and fit handling | 6 |
-| Conversion clarity and persuasion | 30 | message hierarchy and scanability | 5 |
-| Purchase confidence and friction | 20 | price, currency, availability, and total-cost clarity | 5 |
-| Purchase confidence and friction | 20 | shipping and delivery | 4 |
-| Purchase confidence and friction | 20 | returns and warranty | 4 |
-| Purchase confidence and friction | 20 | reviews, ratings, and proof | 4 |
-| Purchase confidence and friction | 20 | seller and transaction trust | 3 |
-| SEO discovery | 20 | crawl and index controls | 4 |
-| SEO discovery | 20 | title, description, heading, and intent alignment | 4 |
-| SEO discovery | 20 | unique content and internal discovery | 4 |
-| SEO discovery | 20 | product structured data | 5 |
-| SEO discovery | 20 | image discovery | 3 |
-| GEO and AI answer readiness | 15 | factual answerability | 4 |
-| GEO and AI answer readiness | 15 | entity and variant clarity | 3 |
-| GEO and AI answer readiness | 15 | evidence and provenance | 3 |
-| GEO and AI answer readiness | 15 | buyer-question coverage | 3 |
-| GEO and AI answer readiness | 15 | freshness and cross-surface consistency | 2 |
-| UX, accessibility, and performance | 15 | mobile layout and navigation | 3 |
-| UX, accessibility, and performance | 15 | interaction usability | 3 |
-| UX, accessibility, and performance | 15 | accessibility basics | 3 |
-| UX, accessibility, and performance | 15 | product media | 2 |
-| UX, accessibility, and performance | 15 | performance and visual stability | 4 |
+- **Conversion clarity and persuasion** (weight 30): offer, product detail,
+  CTA/options, objections, scanability.
+- **Purchase confidence and friction** (weight 20): price/availability,
+  shipping, returns/warranty, proof, seller trust.
+- **SEO discovery** (weight 20): crawl controls, title/description/heading,
+  unique content, markup, images.
+- **GEO and AI answer readiness** (weight 15): factual answerability, entity
+  clarity, provenance, buyer questions, consistency.
+- **UX, accessibility, and performance** (weight 15): mobile path,
+  interactions, accessibility, media, speed/stability.
 
 In the score report, show each category's weight, quality score, coverage, and
-main finding, followed by the criterion ratings and short evidence notes. Cite
-an observation for every rating below 2 and every rating of 4. Name critical
-blockers separately in the agent audit. A critical blocker keeps the readiness
-decision negative even when the arithmetic score is high. SEO and GEO scores
-assess eligibility and answerability, not ranking, rich results, citations, or
-sales.
+main finding as a score bar plus prose, followed by the criterion ratings and
+short evidence notes. Cite an observation for every rating below 2 and every
+rating of 4. Name critical blockers separately in the agent audit. A critical
+blocker keeps the readiness decision negative even when the arithmetic score is
+high. SEO and GEO scores assess eligibility and answerability, not ranking,
+rich results, citations, or sales.
 
 ## Agent audit
 
@@ -233,18 +216,78 @@ Keep this file useful as an agent handoff, not as the human explanation.
 ## Score report
 
 Write the full score detail to `product-page-score.md` beside the agent audit
-unless the prompt names a separate path. Include:
+unless the prompt names a separate path. Do not use markdown tables anywhere in
+this file. Use visual score bars, short prose, and nested lists instead. The
+file has exactly these sections:
 
-1. `## Category scores`: a table with category name, weight, quality score
-   (0 to 100), coverage, and the main finding for each category.
-2. `## Criterion ratings`: every assessed criterion with its weight, rating
-   (0 to 4, `U`, or `NA`), earned points, and a short evidence note. Cite one
-   observation for every rating below 2 and every rating of 4. Briefly explain
-   ratings of 2 or 3.
-3. `## Arithmetic`: the sums and formula line that reproduce the overall score
-   and coverage from the criterion ratings.
+### Top summary
 
-The score report is the only place the category table and criterion ratings
+Start with a one-line headline giving the overall score, band, and coverage.
+Then render a visual score bar so a reader can see the result at a glance.
+
+Use this pattern for every score bar (fill the first row with full blocks up to
+the rounded score out of 100, then dim the rest):
+
+```
+87/100  Strong
+█████████░ ░  87%
+```
+
+Use `█` for filled segments, `░` for empty segments, and one segment per
+10 points (10 segments total). Place the numeric score and band on the first
+line, the bar on the second line. Keep the bar exactly 10 segments wide.
+
+### Category scores
+
+Give each category its own short subsection. For each category show:
+
+- a score bar (same 10-segment pattern as the top summary), with the category
+  name, score, and band on the line above the bar;
+- one prose line for the main finding;
+- a compact detail line: `weight · coverage · provisional label if any`.
+
+Use this shape for every category, in weight order (conversion, purchase
+confidence, SEO, GEO, UX):
+
+```
+### Conversion clarity and persuasion
+
+90/100  Strong
+█████████░  90%
+
+Detailed spec block, clear stock badge and add-to-cart, strong trust signals.
+weight 30 · coverage 100%
+```
+
+### Criterion ratings
+
+List criteria grouped under their parent category as a nested list. Each
+criterion is one line: the criterion name, the rating, and a short evidence
+note. Use a readable rating label rather than a bare number:
+
+- 4 = Excellent, 3 = Good, 2 = Fair, 1 = Weak, 0 = Critical,
+  `U` = Unobserved, `NA` = Not applicable.
+
+Cite one observation for every rating below Good (below 3) and every rating of
+Excellent (4). Briefly explain ratings of Good (3) or Fair (2).
+
+Use this shape:
+
+```
+### Criterion ratings
+
+**Conversion clarity and persuasion**
+- offer — Good (3): price and stock visible, but no bundle or discount shown.
+- product detail — Excellent (4): full spec sheet with driver, impedance,
+  frequency range, weight, and included accessories.
+- CTA/options — Good (3): add-to-cart is clear; no variant selector needed.
+...
+```
+
+Label any provisional score or `UNSCORABLE` result in plain language at the top
+of the section.
+
+The score report is the only place the category scores and criterion ratings
 appear. The agent audit's `## Page score` section references it by path.
 
 At the end of the Codex response, show the human-readable conclusion first,
@@ -265,8 +308,9 @@ the product will rank or convert.
 All three outputs exist at the resolved paths. The agent audit contains the ten
 headings, resolved target URL, access date, page score or `UNSCORABLE` result,
 observations, claim ledger, coverage check, prioritized changes, and source rows.
-The score report contains the category table, criterion ratings, evidence notes,
-and reproducible arithmetic. The human report gives the same decision and score
+The score report contains visual score bars, category subsections, criterion
+ratings with evidence notes, with no markdown
+tables anywhere in the file. The human report gives the same decision and score
 meaning in plain language, passes the human-writing check, states its limits,
 and ends with exact pointers to the agent audit and score report. The final
 response names all three files and leads with the human conclusion.
