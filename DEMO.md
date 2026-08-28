@@ -19,15 +19,20 @@ invents proof, uses private data, edits a page, or publishes anything.
 
 1. Open Codex at the repository root.
 2. Paste [`demo/seed-prompt-product-page.md`](demo/seed-prompt-product-page.md).
-3. Watch for `demo/output/product-page-audit.md` and its status, claim ledger,
-   product-data coverage, and three prioritized changes.
+3. Watch for two outputs: `demo/output/product-page-report.md` for a human
+   reader and `demo/output/product-page-audit.md` for a downstream agent.
 4. If the Codex run is slow, open the genuine snapshot fallback at
-   [`demo/output/product-page-audit.md`](demo/output/product-page-audit.md).
+   [`demo/output/product-page-report.md`](demo/output/product-page-report.md),
+   then pass the structured audit to an agent when needed.
 
 ## Show this — 25 seconds
 
-**Result:** A short Patagonia Black Hole 32L product-page audit that a marketer
-can use to decide what to fix before buying traffic.
+**Human result:** A short Skullcandy Crusher ANC 2 report that says what to do
+before buying traffic, in language a marketer can read quickly.
+
+**Agent result:** A structured audit with the evidence ledger, source rows,
+coverage gaps, and fixes. It is the handoff for another agent, not the human
+explanation.
 
 **Evidence:** The output separates page observations, first-party claims, and
 interpretations. Each source row shows URL, access date, excerpt, role,

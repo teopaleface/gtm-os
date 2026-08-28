@@ -1,19 +1,30 @@
 ---
 name: gtm-product-page-audit
-description: "Audit one public e-commerce product page and produce a concise, evidence-backed pre-traffic brief."
+description: "Audit one public e-commerce product page and produce a concise, evidence-backed pre-traffic audit plus a plain-language report for a human reader."
 ---
 
 # Product-page audit
 
 Produce one auditable pre-traffic decision for one public e-commerce product
-page. The timed run reads only this skill, the supplied input, and the named
-output path. Resolve one explicit `Target URL:` from the invocation prompt or
-the input. If both are present, they must identify the same page; a mismatch is
-missing input, not a reason to guess. In snapshot mode, use the public snapshots
-in the input as the primary evidence. Do not browse or web-search unless the
-prompt explicitly allows a check of that exact URL. A URL alone never
-authorizes browsing. Do not follow links or inspect another URL. This keeps the
-result reproducible under the Skillathon time limit.
+page. Every run creates two separate outputs:
+
+1. a plain-language report for the marketer or founder who needs to make the
+   decision;
+2. a structured audit for a downstream agent that needs evidence, limits, and
+   implementation-ready changes.
+
+The two files are different deliverables. The human report explains the result
+without machine-shaped tables. The agent audit preserves the evidence contract.
+The human report may summarize the audit, but it may not add a claim that is
+absent from it.
+
+Resolve one explicit `Target URL:` from the invocation prompt or the input. If
+both are present, they must identify the same page; a mismatch is missing input,
+not a reason to guess. In snapshot mode, use the public snapshots in the input
+as the primary evidence. Do not browse or web-search unless the prompt
+explicitly allows a check of that exact URL. A URL alone never authorizes
+browsing. Do not follow links or inspect another URL. This keeps the result
+reproducible under the Skillathon time limit.
 
 ## Required input
 
@@ -30,36 +41,92 @@ web. Live URL mode is allowed only when the prompt explicitly permits checking
 the exact `Target URL`; use that page only and keep all other evidence rules.
 
 If the target URL is missing, or neither a usable page snapshot nor an explicit
-exact-URL check is available, write `NEEDS_INPUT`, name the missing field, and
-stop without guessing. Use `INSUFFICIENT_EVIDENCE` when a page is available but
-the evidence cannot support the requested decision.
+exact-URL check is available, write both required outputs with `NEEDS_INPUT`,
+name the missing field, and stop without guessing. Use
+`INSUFFICIENT_EVIDENCE` when a page is available but the evidence cannot support
+the requested decision.
 
 ## Procedure
 
-1. Resolve the `Target URL` from the prompt and input, reject a mismatch as
+1. Resolve the output paths before doing research. The path named by the prompt
+   is the agent-audit path. If no path is supplied, use
+   `demo/output/product-page-audit.md`. Unless the prompt names a separate
+   human-report path, create `product-page-report.md` beside the agent audit.
+   A prompt that names only one output is still completed with both files.
+2. Resolve the `Target URL` from the prompt and input, reject a mismatch as
    `NEEDS_INPUT`, then lock the scope to one primary product page. Keep the
    competitor and query optional.
-2. Extract page observations from the supplied snapshot or the permitted exact
-   URL check: product name, price and currency, availability,
-   variants, brand, identifiers, images, shipping, returns, ratings or reviews,
-   and Product JSON-LD when the input provides it. Mark absent fields as
-   `unknown`, never as a likely value.
-3. Build a short claim ledger. For each material claim, include the exact
+3. Extract page observations from the supplied snapshot or the permitted
+   exact-URL check: product name, price and currency, availability, variants,
+   brand, identifiers, images, shipping, returns, ratings or reviews, and
+   Product JSON-LD when the input provides it. Mark absent fields as `unknown`,
+   never as a likely value.
+4. Build a short claim ledger. For each material claim, include the exact
    excerpt, source URL, source role, and one status: `verified`, `unsupported`,
    `contradicted`, or `unknown`. Keep first-party claims separate from facts
    supported by independent evidence.
-4. Check product-data coverage for title, description, image, link, price,
+5. Check product-data coverage for title, description, image, link, price,
    availability, condition, brand, identifiers, shipping, returns, and product
    markup. Use the supplied Google guidance as the rubric. Treat structured data
    as an eligibility aid, never as a ranking or display guarantee.
-5. Return at most three prioritized changes. A change includes the issue,
+6. Return at most three prioritized changes. A change includes the issue,
    recommendation, evidence, observable success signal, and effort or
    dependency. If the evidence cannot support three changes, return fewer and
    use `INSUFFICIENT_EVIDENCE`.
+7. Draft the human report from the finalized agent audit. Do not do a second,
+   looser research pass for it. Carry over the decision, strongest evidence,
+   fixes, and limits without adding claims.
+8. Write the agent audit first, then the human report. Finish only after both
+   files exist and the human report points to the exact agent-audit path.
 
-## Output
+## Human report
 
-Write to the output path named by the prompt; use
+Apply this built-in unslop pass on every run. The skill must work even when no
+separate writing skill is installed.
+
+- Write in the language of the user's request. Keep source excerpts in their
+  original wording when precision matters.
+- Lead with the decision in plain language. Say what you would do and why.
+- Use concrete facts, short paragraphs, and a natural rhythm. Prefer "is" and
+  "has" over inflated phrasing.
+- Remove hype, generic filler, chatbot phrases, decorative emojis, em dashes,
+  title-case headings, and claims about impact that the evidence cannot support.
+- Separate what the page says from what you conclude. Mark interpretations and
+  hypotheses in ordinary language instead of presenting them as facts.
+- Keep the report concise enough to read in one minute. Include only the
+  strongest facts, up to three fixes, and the important unknowns.
+
+Use this shape, adapting the wording to the evidence:
+
+```markdown
+# Product-page report
+
+## Bottom line
+<status and direct recommendation>
+
+## What I found
+<the few facts a person needs>
+
+## What needs attention
+<prioritized fixes>
+
+## What I couldn't verify
+<open unknowns and limits>
+
+## Next move
+<one practical next step>
+
+## Agent handoff
+The structured audit is at `<agent-audit-path>`. Give that file to another
+agent when it needs the evidence ledger, source rows, or implementation context.
+```
+
+The report still uses this shape for `NEEDS_INPUT`; its bottom line names the
+missing input and its next move says what to provide.
+
+## Agent audit
+
+Write to the agent-audit path named by the prompt; use
 `demo/output/product-page-audit.md` when no path is supplied. Keep the brief
 under 60 physical lines and use exactly these headings:
 
@@ -78,11 +145,16 @@ field, source role, independence key, and limitation. Label reasoning as
 `fact`, `interpretation`, or `hypothesis`. Use `NEEDS_INPUT` only when the
 required input is absent; use `INSUFFICIENT_EVIDENCE` when the page or evidence
 does not support the decision. Include the resolved `Target URL` and access
-date under `## Scope`.
+date under `## Scope`. Keep this file useful as an agent handoff, not as the
+human explanation.
+
+At the end of the Codex response, show the human-readable conclusion first,
+then name both output paths and explain that the agent audit is the structured
+handoff. Do not return only "the audit was written".
 
 ## Safety boundary
 
-Keep the output read-only and public-data-only. State unknowns instead of
+Keep both outputs read-only and public-data-only. State unknowns instead of
 inventing reviews, certifications, availability, identifiers, competitor
 claims, rankings, conversions, or buyer intent. Do not reproduce personal data,
 edit or publish a page, modify a feed or account, contact anyone, or claim that
@@ -90,7 +162,9 @@ the product will rank or convert.
 
 ## Done
 
-The output exists at the requested path, contains the nine headings, shows the
-resolved target URL and access date, separates observations from claims and reasoning,
-includes a coverage check and prioritized changes, and leaves unsupported
-outcomes explicitly unknown.
+Both outputs exist at the resolved paths. The agent audit contains the nine
+headings, resolved target URL, access date, observations, claim ledger, coverage
+check, prioritized changes, and source rows. The human report gives the same
+decision in plain language, passes the human-writing check, states its limits,
+and ends with an exact pointer to the agent audit. The final response names both
+files and leads with the human conclusion.
