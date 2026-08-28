@@ -38,6 +38,7 @@ Then align the page data with the confirmed stock and shipping rules.
 
 ## Agent handoff
 
-The structured audit is at `demo/output/product-page-audit.md`. Give that file
-to another agent when it needs the evidence ledger, source rows, or
-implementation context. This report is the human-readable summary.
+The structured audit is at `demo/output/product-page-audit.md`, and the full
+score detail is at `demo/output/product-page-score.md`. Give the audit to
+another agent when it needs the evidence ledger, source rows, or implementation
+context. This report is the human-readable summary.

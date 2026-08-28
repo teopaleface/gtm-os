@@ -1,6 +1,6 @@
 ---
 name: gtm-product-page-audit
-description: "Score and audit one public e-commerce product page for conversion readiness, SEO, generative-search readiness (GEO), usability, and evidence-backed pre-traffic fixes, with separate human and agent outputs."
+description: "Score and audit one public e-commerce product page for conversion readiness, SEO, generative-search readiness (GEO), usability, and evidence-backed pre-traffic fixes, with separate human, agent, and score outputs."
 ---
 
 # Product page audit
@@ -50,7 +50,9 @@ guessing.
    human-report path, create `product-page-report.md` beside the agent audit.
    Unless the prompt names a separate score-report path, create
    `product-page-score.md` beside the agent audit. A prompt that names only one
-   output is still completed with all three files.
+   or two outputs is still completed with all three files.
+   If the invocation says to write "both" named outputs, treat the score report
+   as the additional skill-required artifact and write it before stopping.
 2. Lock the product, audience, geography, query, and decision. Keep one page as
    the primary object and record the page URL and access date.
 3. Observe the page and its product markup using only an enabled capability or
@@ -112,7 +114,8 @@ separate writing skill is installed.
   strongest facts, the score and what it means when available, up to three
   fixes, and the important unknowns.
 - If a numeric score is available, use the same rounded overall and category
-  values as the agent audit. If it is `UNSCORABLE`, say that plainly.
+  values as the finalized audit and score report. If it is `UNSCORABLE`, say
+  that plainly.
 
 Use this shape, adapting the wording to the evidence:
 

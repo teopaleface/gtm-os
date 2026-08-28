@@ -1,20 +1,24 @@
 ---
 name: gtm-product-page-audit
-description: "Audit and score one public e-commerce product page, producing a concise evidence-backed agent audit and a plain-language report for a human reader."
+description: "Audit and score one public e-commerce product page, producing a plain-language report, a structured agent audit, and a full score report."
 ---
 
 # Product-page audit
 
 Produce one auditable pre-traffic decision for one public e-commerce product
-page. Every run creates two separate outputs:
+page. Every run creates three separate outputs:
 
 1. a plain-language report for the marketer or founder who needs to make the
    decision;
 2. a structured audit for a downstream agent that needs evidence, limits, and
    implementation-ready changes.
+3. a full score report with the category table, criterion ratings, evidence
+   notes, and reproducible arithmetic.
 
-The two files are different deliverables. The human report explains the result
-without machine-shaped tables. The agent audit preserves the evidence contract.
+The three files are different deliverables. The human report explains the
+result without machine-shaped tables. The agent audit preserves the evidence
+contract. The score report keeps the detailed scoring separate so a person can
+read the decision while another agent can recalculate the score.
 The human report may summarize the audit, but it may not add a claim that is
 absent from it. When the observations are sufficient, the agent audit also
 includes a page-quality score covering conversion, purchase confidence, SEO,
@@ -44,8 +48,8 @@ web. Live URL mode is allowed only when the prompt explicitly permits checking
 the exact `Target URL`; use that page only and keep all other evidence rules.
 
 If the target URL is missing, or neither a usable page snapshot nor an explicit
-exact-URL check is available, write both required outputs with `NEEDS_INPUT`,
-name the missing field, and stop without guessing. Use
+exact-URL check is available, write all three required outputs with
+`NEEDS_INPUT`, name the missing field, and stop without guessing. Use
 `INSUFFICIENT_EVIDENCE` when a page is available but the evidence cannot support
 the requested decision.
 
@@ -55,7 +59,11 @@ the requested decision.
    is the agent-audit path. If no path is supplied, use
    `demo/output/product-page-audit.md`. Unless the prompt names a separate
    human-report path, create `product-page-report.md` beside the agent audit.
-   A prompt that names only one output is still completed with both files.
+   Unless the prompt names a separate score-report path, create
+   `product-page-score.md` beside the agent audit. A prompt that names only one
+   or two outputs is still completed with all three files.
+   If the invocation says to write "both" named outputs, treat the score report
+   as the additional skill-required artifact and write it before stopping.
 2. Resolve the `Target URL` from the prompt and input, reject a mismatch as
    `NEEDS_INPUT`, then lock the scope to one primary product page. Keep the
    competitor and query optional.
@@ -72,10 +80,11 @@ the requested decision.
    availability, condition, brand, identifiers, shipping, returns, and product
    markup. Use the supplied Google guidance as the rubric. Treat structured data
    as an eligibility aid, never as a ranking or display guarantee.
-6. Score the observed page with the rubric below. Return the overall score or
-   `UNSCORABLE`, audit coverage, category scores with category coverage,
-   criterion ratings, and any critical blockers. Keep unknown criteria out of
-   quality points, but count them in coverage.
+6. Score the observed page with the rubric below. Put the overall score or
+   `UNSCORABLE`, audit coverage, provisional or unscorable label, and critical
+   blockers in the agent audit. Put the category scores, category coverage,
+   criterion ratings, evidence notes, and arithmetic in the score report. Keep
+   unknown criteria out of quality points, but count them in coverage.
 7. Return at most three prioritized changes. A change includes the issue,
    recommendation, evidence, observable success signal, and effort or
    dependency. If the evidence cannot support three changes, return fewer and
@@ -83,8 +92,9 @@ the requested decision.
 8. Draft the human report from the finalized agent audit. Do not do a second,
    looser research pass for it. Carry over the decision, strongest evidence,
    fixes, and limits without adding claims.
-9. Write the agent audit first, then the human report. Finish only after both
-   files exist and the human report points to the exact agent-audit path.
+9. Write the agent audit first, then the score report, then the human report.
+   Finish only after all three files exist and the human report points to the
+   exact agent-audit path.
 
 ## Human report
 
@@ -106,7 +116,8 @@ separate writing skill is installed.
   strongest facts, the score and what it means when available, up to three
   fixes, and the important unknowns.
 - If a numeric score is available, use the same rounded overall and category
-  values as the agent audit. If it is `UNSCORABLE`, say that plainly.
+  values as the finalized audit and score report. If it is `UNSCORABLE`, say
+  that plainly.
 
 Use this shape, adapting the wording to the evidence:
 
@@ -129,8 +140,9 @@ Use this shape, adapting the wording to the evidence:
 <one practical next step>
 
 ## Agent handoff
-The structured audit is at `<agent-audit-path>`. Give that file to another
-agent when it needs the evidence ledger, source rows, or implementation context.
+The structured audit is at `<agent-audit-path>`, and the full score detail is
+at `<score-report-path>`. Give the audit to another agent when it needs the
+evidence ledger, source rows, or implementation context.
 ```
 
 The report still uses this shape for `NEEDS_INPUT`; its bottom line names the
@@ -161,12 +173,13 @@ Use these category weights and inspect the listed dimensions:
 | GEO and AI answer readiness | 15 | factual answerability, entity clarity, provenance, buyer questions, consistency |
 | UX, accessibility, and performance | 15 | mobile path, interactions, accessibility, media, speed/stability |
 
-In the agent audit, show each category's weight, quality score, coverage, and
+In the score report, show each category's weight, quality score, coverage, and
 main finding, followed by the criterion ratings and short evidence notes. Cite
 an observation for every rating below 2 and every rating of 4. Name critical
-blockers separately. A critical blocker keeps the readiness decision negative
-even when the arithmetic score is high. SEO and GEO scores assess eligibility
-and answerability, not ranking, rich results, citations, or sales.
+blockers separately in the agent audit. A critical blocker keeps the readiness
+decision negative even when the arithmetic score is high. SEO and GEO scores
+assess eligibility and answerability, not ranking, rich results, citations, or
+sales.
 
 ## Agent audit
 
@@ -185,21 +198,42 @@ under 60 physical lines and use exactly these headings:
 - `## Unknowns and limits`
 - `## Sources`
 
-Every material source row includes URL, access date, exact excerpt or precise
-field, source role, independence key, and limitation. Label reasoning as
-`fact`, `interpretation`, or `hypothesis`. Use `NEEDS_INPUT` only when the
-required input is absent; use `INSUFFICIENT_EVIDENCE` when the page or evidence
-does not support the decision. Include the resolved `Target URL` and access
-date under `## Scope`. Keep this file useful as an agent handoff, not as the
-human explanation.
+In `## Page score`, include the overall score and band, audit coverage,
+provisional or unscorable label when required, critical blockers, and a pointer
+to the score-report path. Do not put the category table or criterion ratings in
+this file; keep those in the score report. Every material source row includes
+URL, access date, exact excerpt or precise field, source role, independence key,
+and limitation. Label reasoning as `fact`, `interpretation`, or `hypothesis`.
+Use `NEEDS_INPUT` only when the required input is absent; use
+`INSUFFICIENT_EVIDENCE` when the page or evidence does not support the
+decision. Include the resolved `Target URL` and access date under `## Scope`.
+Keep this file useful as an agent handoff, not as the human explanation.
+
+## Score report
+
+Write the full score detail to `product-page-score.md` beside the agent audit
+unless the prompt names a separate path. Include:
+
+1. `## Category scores`: a table with category name, weight, quality score
+   (0 to 100), coverage, and the main finding for each category.
+2. `## Criterion ratings`: every assessed criterion with its weight, rating
+   (0 to 4, `U`, or `NA`), earned points, and a short evidence note. Cite one
+   observation for every rating below 2 and every rating of 4. Briefly explain
+   ratings of 2 or 3.
+3. `## Arithmetic`: the sums and formula line that reproduce the overall score
+   and coverage from the criterion ratings.
+
+The score report is the only place the category table and criterion ratings
+appear. The agent audit's `## Page score` section references it by path.
 
 At the end of the Codex response, show the human-readable conclusion first,
-then name both output paths and explain that the agent audit is the structured
-handoff. Do not return only "the audit was written".
+then name all three output paths and explain that the agent audit is the
+structured handoff and the score report contains the full scoring detail. Do
+not return only "the audit was written".
 
 ## Safety boundary
 
-Keep both outputs read-only and public-data-only. State unknowns instead of
+Keep all three outputs read-only and public-data-only. State unknowns instead of
 inventing reviews, certifications, availability, identifiers, competitor
 claims, rankings, conversions, or buyer intent. Do not reproduce personal data,
 edit or publish a page, modify a feed or account, contact anyone, or claim that
@@ -207,10 +241,11 @@ the product will rank or convert.
 
 ## Done
 
-Both outputs exist at the resolved paths. The agent audit contains the ten
+All three outputs exist at the resolved paths. The agent audit contains the ten
 headings, resolved target URL, access date, page score or `UNSCORABLE` result,
 observations, claim ledger, coverage check, prioritized changes, and source rows.
-The human report gives the same decision and score meaning in plain language,
-passes the human-writing check, states its limits, and ends with an exact
-pointer to the agent audit. The final response names both files and leads with
-the human conclusion.
+The score report contains the category table, criterion ratings, evidence notes,
+and reproducible arithmetic. The human report gives the same decision and score
+meaning in plain language, passes the human-writing check, states its limits,
+and ends with exact pointers to the agent audit and score report. The final
+response names all three files and leads with the human conclusion.

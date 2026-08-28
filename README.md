@@ -22,7 +22,7 @@ The package includes 41 explicit playbooks across strategy, audience, positionin
 
 ## Focused e-commerce slice
 
-`gtm-product-page-audit` is the focused e-commerce workflow: one public product page, a 100-point conversion, SEO, GEO, and experience score with audit coverage, optional comparison context, a claim ledger, product-data coverage, and up to three pre-traffic changes. Each run writes a plain-language report for a person and a separate structured audit for a downstream agent. It does not replace the broader GTM workflow; it is a small, explicit playbook that can stand alone in a timed demo.
+`gtm-product-page-audit` is the focused e-commerce workflow: one public product page, a 100-point conversion, SEO, GEO, and experience score with audit coverage, optional comparison context, a claim ledger, product-data coverage, and up to three pre-traffic changes. Each run writes a plain-language report for a person, a separate structured audit for a downstream agent, and a full score report with category ratings and reproducible arithmetic. It does not replace the broader GTM workflow; it is a small, explicit playbook that can stand alone in a timed demo.
 
 ## How the flow works
 
