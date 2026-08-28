@@ -1,7 +1,7 @@
 ## Status
-INSUFFICIENT_EVIDENCE — the snapshot supports an exploratory audit, not a complete traffic-readiness decision. This is a fallback, not a live page check.
+INSUFFICIENT_EVIDENCE. The snapshot supports an exploratory audit, not a complete traffic-readiness decision. This is a fallback, not a live page check.
 ## Scope
-Product: Patagonia Black Hole Pack 32L | Audience: carry-on backpack shoppers on short business trips | Query: best carry-on backpack for a short business trip | Competitor: Deuter Carry On 30 | Accessed: 2026-08-28
+Target URL: <https://www.patagonia.com/product/black-hole-pack-32-liters/49302.html> | Product: Patagonia Black Hole Pack 32L | Audience: carry-on backpack shoppers on short business trips | Query: best carry-on backpack for a short business trip | Competitor: Deuter Carry On 30 | Accessed: 2026-08-28
 ## Decision
 The page can support a bounded discovery hypothesis, but the evidence is insufficient to declare it ready for qualified traffic. Verify shipping, returns, availability, and Product JSON-LD first; this is an interpretation of the supplied snapshots, not a ranking or conversion prediction.
 ## Page facts

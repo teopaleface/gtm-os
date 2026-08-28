@@ -7,28 +7,40 @@ description: "Audit one public e-commerce product page and produce a concise, ev
 
 Produce one auditable pre-traffic decision for one public e-commerce product
 page. The timed run reads only this skill, the supplied input, and the named
-output path. Use the public snapshots in the input as the primary evidence; do
-not browse or web-search unless the prompt explicitly allows a single exact URL
-check. This keeps the result reproducible under the Skillathon time limit.
+output path. Resolve one explicit `Target URL:` from the invocation prompt or
+the input. If both are present, they must identify the same page; a mismatch is
+missing input, not a reason to guess. In snapshot mode, use the public snapshots
+in the input as the primary evidence. Do not browse or web-search unless the
+prompt explicitly allows a check of that exact URL. A URL alone never
+authorizes browsing. Do not follow links or inspect another URL. This keeps the
+result reproducible under the Skillathon time limit.
 
 ## Required input
 
-The input names one product page URL, access date, product or merchant context,
-and a public snapshot with exact excerpts or precise fields. It may include one
-competitor page, one shopper query, and a small Google guidance snapshot. Public
-data only. A source URL proves where an observation came from; a seller claim is
-not independent proof of the promised outcome.
+In snapshot mode, the input names one `Target URL`, access date, product or
+merchant context, and a public snapshot with exact excerpts or precise fields.
+In live URL mode, the prompt may provide the `Target URL` directly; if an input
+is also supplied, its target must match. The input may include one competitor
+page, one shopper query, and a small Google guidance snapshot. Public data only.
+A source URL proves where an observation came from; a seller claim is not
+independent proof of the promised outcome.
 
-If the product URL or usable page snapshot is missing, write `NEEDS_INPUT`,
-name the missing field, and stop without guessing. Use `INSUFFICIENT_EVIDENCE`
-when a page is available but the evidence cannot support the requested
-decision.
+The default is snapshot mode: use the supplied snapshot and do not fetch the
+web. Live URL mode is allowed only when the prompt explicitly permits checking
+the exact `Target URL`; use that page only and keep all other evidence rules.
+
+If the target URL is missing, or neither a usable page snapshot nor an explicit
+exact-URL check is available, write `NEEDS_INPUT`, name the missing field, and
+stop without guessing. Use `INSUFFICIENT_EVIDENCE` when a page is available but
+the evidence cannot support the requested decision.
 
 ## Procedure
 
-1. Read the complete input and lock the scope to one primary product page. Keep
-   the competitor and query optional.
-2. Extract page observations: product name, price and currency, availability,
+1. Resolve the `Target URL` from the prompt and input, reject a mismatch as
+   `NEEDS_INPUT`, then lock the scope to one primary product page. Keep the
+   competitor and query optional.
+2. Extract page observations from the supplied snapshot or the permitted exact
+   URL check: product name, price and currency, availability,
    variants, brand, identifiers, images, shipping, returns, ratings or reviews,
    and Product JSON-LD when the input provides it. Mark absent fields as
    `unknown`, never as a likely value.
@@ -65,7 +77,8 @@ Every material source row includes URL, access date, exact excerpt or precise
 field, source role, independence key, and limitation. Label reasoning as
 `fact`, `interpretation`, or `hypothesis`. Use `NEEDS_INPUT` only when the
 required input is absent; use `INSUFFICIENT_EVIDENCE` when the page or evidence
-does not support the decision.
+does not support the decision. Include the resolved `Target URL` and access
+date under `## Scope`.
 
 ## Safety boundary
 
@@ -78,6 +91,6 @@ the product will rank or convert.
 ## Done
 
 The output exists at the requested path, contains the nine headings, shows the
-primary URL and access date, separates observations from claims and reasoning,
+resolved target URL and access date, separates observations from claims and reasoning,
 includes a coverage check and prioritized changes, and leaves unsupported
 outcomes explicitly unknown.

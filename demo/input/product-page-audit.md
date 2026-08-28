@@ -4,6 +4,7 @@
 
 - **User:** e-commerce product marketer
 - **Decision:** decide whether a product page is ready for a bounded discovery or traffic test
+- **Target URL:** <https://www.patagonia.com/product/black-hole-pack-32-liters/49302.html>
 - **Product:** Patagonia Black Hole Pack 32L
 - **Audience:** people comparing a carry-on backpack for a short business trip
 - **Query:** best carry-on backpack for a short business trip
