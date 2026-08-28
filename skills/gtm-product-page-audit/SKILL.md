@@ -1,18 +1,21 @@
 ---
 name: gtm-product-page-audit
-description: "Audit one public e-commerce product page for buyer clarity, merchant-data completeness, and evidence-backed pre-traffic fixes."
+description: "Score and audit one public e-commerce product page for conversion readiness, SEO, generative-search readiness (GEO), usability, and evidence-backed pre-traffic fixes, with separate human and agent outputs."
 ---
 
 # Product page audit
 
 Turn one public product page into a bounded pre-traffic decision. Keep the work
-read-only and separate what the page says from what the evidence supports.
+read-only and separate what the page says from what the evidence supports. Every
+run creates two separate outputs: a plain-language report for a person and a
+structured audit for a downstream agent. The human report may summarize the
+audit, but it may not add a claim that is absent from it.
 
 Read `../../references/evidence-policy.md` and
 `../../references/artifact-contract.md` before producing the result. Read
 `../../references/user-capabilities.md` before choosing a live source. Use a
 supplied snapshot when a page is inaccessible or a timed run needs a
-deterministic fallback.
+deterministic fallback. Read `references/page-score.md` before scoring.
 
 ## Capability gates
 
@@ -34,62 +37,137 @@ deterministic fallback.
 
 Work on one product page. A public competitor page and a shopper query are
 optional comparison context, not extra permission to audit the whole market.
-If the user supplies no public product URL or usable snapshot, return
-`NEEDS_INPUT` with the exact missing input.
+If the user supplies no public product URL or usable snapshot, write both
+outputs with `NEEDS_INPUT`, name the exact missing input, and stop without
+guessing.
 
 ## Workflow
 
-1. Lock the product, audience, geography, query, and decision. Keep one page as
+1. Resolve the output paths before research. The path named by the prompt is the
+   agent-audit path. If no path is supplied, use
+   `demo/output/product-page-audit.md`. Unless the prompt names a separate
+   human-report path, create `product-page-report.md` beside the agent audit. A
+   prompt that names only one output is still completed with both files.
+2. Lock the product, audience, geography, query, and decision. Keep one page as
    the primary object and record the page URL and access date.
-2. Observe the page and its product markup using only an enabled capability or
-   the supplied snapshot. Record the visible product name,
-   price and currency, availability, variants, brand, identifiers, images,
-   shipping, returns, reviews or ratings, and relevant Product JSON-LD. Mark
-   each item as visible, markup-only, first-party claim, or unavailable.
-3. Build a claim ledger for material promises. For every claim, capture the
+3. Observe the page and its product markup using only an enabled capability or
+   the supplied snapshot. Record the visible product name, price and currency,
+   availability, variants, brand, identifiers, images, shipping, returns,
+   reviews or ratings, and relevant Product JSON-LD. When observable, also
+   inspect the title, description, main heading, canonical, robots controls,
+   internal discovery, mobile purchase path, accessibility basics, and dated
+   performance evidence. Mark each item as visible, markup-only, first-party
+   claim, measured, or unavailable.
+4. Build a claim ledger for material promises. For every claim, capture the
    exact page excerpt, source URL, source role, and status: `verified`,
    `unsupported`, `contradicted`, or `unknown`. A first-party page proves that
    the seller made a claim; it does not independently prove the outcome.
-4. If a query or competitor was supplied, compare only the stated buyer
+5. If a query or competitor was supplied, compare only the stated buyer
    decision. Treat search or AI answers as dated observations, not rankings or
    market facts. Use independent sources for material external claims and stop
    at `INSUFFICIENT_EVIDENCE` when the evidence bar is not met.
-5. Check product-information coverage against Google’s official product and
+6. Check product-information coverage against Google's official product and
    merchant-listing guidance. Structured data can improve eligibility for
    search enhancements, but it is not a guarantee of display or ranking. Use
    [Google product structured data](https://developers.google.com/search/docs/appearance/structured-data/product)
-   and [Google’s generative AI search guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
+   and [Google's generative AI search guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
    as the rubric, not as a promise of visibility.
-6. Prioritize up to three changes. Each change needs an evidence-backed issue,
+7. Score the observed page with `references/page-score.md`. Return the overall
+   score, band, audit coverage, category scores, criterion ratings, and any
+   critical blockers. Keep unknowns unscored, label low-coverage results
+   provisional, and never present the score as a conversion, ranking, or AI
+   citation prediction.
+8. Prioritize up to three changes. Each change needs an evidence-backed issue,
    the proposed copy/data/experiment change, a reason, an observable success
    signal, and an effort or dependency note. Return fewer changes when the
    evidence cannot support three; say why.
+9. Draft the human report from the finalized agent audit. Do not do a second,
+   looser research pass for it. Carry over the decision, strongest evidence,
+   fixes, and limits without adding claims.
+10. Write the agent audit first, then the human report. Finish only after both
+    files exist and the human report points to the exact agent-audit path.
 
-## Output
+## Human report
 
-Use this order:
+Apply this built-in unslop pass on every run. The skill must work even when no
+separate writing skill is installed.
 
-1. `## Status` — `READY`, `NEEDS_INPUT`, or `INSUFFICIENT_EVIDENCE`.
-2. `## Decision` — one sentence answering whether the page is ready for the
+- Write in the language of the user's request. Keep source excerpts in their
+  original wording when precision matters.
+- Lead with the decision in plain language. Say what you would do and why.
+- Use concrete facts, short paragraphs, and a natural rhythm. Prefer "is" and
+  "has" over inflated phrasing.
+- Remove hype, generic filler, chatbot phrases, decorative emojis, em dashes,
+  title-case headings, and claims about impact that the evidence cannot support.
+- Separate what the page says from what you conclude. Mark interpretations and
+  hypotheses in ordinary language instead of presenting them as facts.
+- Keep the report concise enough to read in one minute. Include only the
+  strongest facts, up to three fixes, and the important unknowns.
+
+Use this shape, adapting the wording to the evidence:
+
+```markdown
+# Product-page report
+
+## Bottom line
+<status and direct recommendation>
+
+## What I found
+<the few facts a person needs>
+
+## What needs attention
+<prioritized fixes>
+
+## What I couldn't verify
+<open unknowns and limits>
+
+## Next move
+<one practical next step>
+
+## Agent handoff
+The structured audit is at `<agent-audit-path>`. Give that file to another
+agent when it needs the evidence ledger, source rows, or implementation context.
+```
+
+The report still uses this shape for `NEEDS_INPUT`; its bottom line names the
+missing input and its next move says what to provide.
+
+## Agent audit
+
+Write to the agent-audit path named by the prompt; use
+`demo/output/product-page-audit.md` when no path is supplied. Use this order:
+
+1. `## Status`: `READY`, `NEEDS_INPUT`, or `INSUFFICIENT_EVIDENCE`.
+2. `## Page score`: overall score and band, audit coverage, provisional or
+   unscorable label when required, critical blockers, and a category table with
+   weight, quality score, coverage, and the main finding. Follow it
+   with criterion ratings and short evidence notes.
+3. `## Decision`: one sentence answering whether the page is ready for the
    stated traffic or discovery test, with calibrated confidence.
-3. `## Scope` — product, audience, query, competitor, URL, and access date.
-4. `## Page facts` — observed facts and first-party claims kept distinct.
-5. `## Claim ledger` — claim, excerpt, source, status, and caveat.
-6. `## Product-data coverage` — present, missing, or uncheckable fields.
-7. `## Prioritized changes` — no more than three actionable changes.
-8. `## Unknowns and limits` — inaccessible sources, assumptions, and the
+4. `## Scope`: product, audience, query, competitor, URL, and access date.
+5. `## Page facts`: observed facts and first-party claims kept distinct.
+6. `## Claim ledger`: claim, excerpt, source, status, and caveat.
+7. `## Product-data coverage`: present, missing, or uncheckable fields.
+8. `## Prioritized changes`: no more than three actionable changes.
+9. `## Unknowns and limits`: inaccessible sources, assumptions, and the
    cheapest next check.
-9. `## Sources` — URL, access date, short excerpt or precise field, role, and
+10. `## Sources`: URL, access date, short excerpt or precise field, role, and
    independence key for every material external fact.
 
 Label reasoning as `fact`, `interpretation`, or `hypothesis`. A proposed
 success signal is a measurement plan, never a reported result. Keep claims
 about rankings, conversions, demand, and purchase intent as unknown unless the
-user provides direct measurement data.
+user provides direct measurement data. Keep this file useful as an agent
+handoff, not as the human explanation.
+
+At the end of the Codex response, show the human-readable conclusion first,
+then name both output paths and explain that the agent audit is the structured
+handoff. Do not return only "the audit was written".
 
 ## Boundary
 
-The audit produces a decision and a change proposal. It does not expose
+Both outputs are read-only and public-data-only. The audit produces a decision
+and a change proposal. It does not expose
 personal or customer data, invent reviews or certifications, infer missing
 values, edit a page or feed, change an ad or store account, send outreach, or
 publish anything. If the user wants a change, return a reviewable proposal and
@@ -97,8 +175,11 @@ wait for a separate, explicit approval before any external action.
 
 ## Completion
 
-The result is complete when the primary URL and access date are visible, page
-observations are separated from claims and interpretations, every material
-external fact has a traceable source, missing evidence is explicit, the
-recommended changes are prioritized, and the output states what the audit did
-not establish.
+The result is complete when both outputs exist at the resolved paths, the
+primary URL and access date are visible, page observations are separated from
+claims and interpretations, every material external fact has a traceable
+source, the score arithmetic and coverage can be recalculated from the
+criterion ratings, missing evidence is explicit, the recommended changes are
+prioritized, and the outputs state what the audit did not establish. The human
+report passes the human-writing check and ends with an exact pointer to the
+agent audit.
