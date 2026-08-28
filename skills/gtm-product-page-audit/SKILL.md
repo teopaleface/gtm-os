@@ -14,9 +14,8 @@ audit, but it may not add a claim that is absent from it.
 
 Read `../../references/evidence-policy.md` and
 `../../references/artifact-contract.md` before producing the result. Read
-`../../references/user-capabilities.md` before choosing a live source. Use a
-supplied snapshot when a page is inaccessible or a timed run needs a
-deterministic fallback. Read `references/page-score.md` before scoring.
+`../../references/user-capabilities.md` before choosing a live source. Read
+`references/page-score.md` before scoring.
 
 ## Capability gates
 
@@ -24,8 +23,7 @@ deterministic fallback. Read `references/page-score.md` before scoring.
   `configured: true`, and `ready: true`. Follow `../gtm-apify/SKILL.md`; never
   copy the token into prompts, URLs, output, or logs.
 - Use Browser only when `browser: enabled`. If it is disabled or unavailable,
-  use an ordinary public-web or connector source when one is available, or
-  use the supplied snapshot.
+  use an ordinary public-web or connector source when one is available.
 - Use Computer Use only when `computer_use: enabled` and the page requires
   visual or interactive inspection that the other permitted sources cannot
   provide. Keep it read-only and stop before login, secret entry, form
@@ -36,11 +34,9 @@ deterministic fallback. Read `references/page-score.md` before scoring.
 
 ## Scope
 
-Work on one product page. A public competitor page and a shopper query are
-optional comparison context, not extra permission to audit the whole market.
-If the user supplies no public product URL or usable snapshot, write all three
-outputs with `NEEDS_INPUT`, name the exact missing input, and stop without
-guessing.
+Work on one product page. The only required input is a public product URL. If
+the user supplies no public product URL, write all three outputs with
+`NEEDS_INPUT`, name the exact missing input, and stop without guessing.
 
 ## Workflow
 
@@ -53,10 +49,10 @@ guessing.
    or two outputs is still completed with all three files.
    If the invocation says to write "both" named outputs, treat the score report
    as the additional skill-required artifact and write it before stopping.
-2. Lock the product, audience, geography, query, and decision. Keep one page as
+2. Lock the product and geography from the page itself. Keep one page as
    the primary object and record the page URL and access date.
-3. Observe the page and its product markup using only an enabled capability or
-   the supplied snapshot. Record the visible product name, price and currency,
+3. Observe the page and its product markup using only an enabled capability.
+   Record the visible product name, price and currency,
    availability, variants, brand, identifiers, images, shipping, returns,
    reviews or ratings, and relevant Product JSON-LD. When observable, also
    inspect the title, description, main heading, canonical, robots controls,
@@ -67,32 +63,28 @@ guessing.
    exact page excerpt, source URL, source role, and status: `verified`,
    `unsupported`, `contradicted`, or `unknown`. A first-party page proves that
    the seller made a claim; it does not independently prove the outcome.
-5. If a query or competitor was supplied, compare only the stated buyer
-   decision. Treat search or AI answers as dated observations, not rankings or
-   market facts. Use independent sources for material external claims and stop
-   at `INSUFFICIENT_EVIDENCE` when the evidence bar is not met.
-6. Check product-information coverage against Google's official product and
+5. Check product-information coverage against Google's official product and
    merchant-listing guidance. Structured data can improve eligibility for
    search enhancements, but it is not a guarantee of display or ranking. Use
    [Google product structured data](https://developers.google.com/search/docs/appearance/structured-data/product)
    and [Google's generative AI search guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
    as the rubric, not as a promise of visibility.
-7. Score the observed page with `references/page-score.md`. Put the overall
+6. Score the observed page with `references/page-score.md`. Put the overall
    score, band, audit coverage, provisional or unscorable label, and critical
    blockers in the agent audit's `## Page score` section. Put the category
    table, criterion ratings, and evidence notes in the separate score-report
    file. Keep unknowns unscored, label low-coverage results provisional, and
    never present the score as a conversion, ranking, or AI citation prediction.
-8. Prioritize up to three changes. Each change needs an evidence-backed issue,
+7. Prioritize up to three changes. Each change needs an evidence-backed issue,
    the proposed copy/data/experiment change, a reason, an observable success
    signal, and an effort or dependency note. Return fewer changes when the
    evidence cannot support three; say why.
-9. Draft the human report from the finalized agent audit. Do not do a second,
+8. Draft the human report from the finalized agent audit. Do not do a second,
    looser research pass for it. Carry over the decision, strongest evidence,
    fixes, and limits without adding claims.
-10. Write the agent audit first, then the score report, then the human report.
-    Finish only after all three files exist and the human report points to the
-    exact agent-audit path.
+9. Write the agent audit first, then the score report, then the human report.
+   Finish only after all three files exist and the human report points to the
+   exact agent-audit path.
 
 ## Human report
 
@@ -157,7 +149,7 @@ Write to the agent-audit path named by the prompt; use
    file. End the section with a pointer to the score-report path.
 3. `## Decision`: one sentence answering whether the page is ready for the
    stated traffic or discovery test, with calibrated confidence.
-4. `## Scope`: product, audience, query, competitor, URL, and access date.
+4. `## Scope`: product, URL, and access date.
 5. `## Page facts`: observed facts and first-party claims kept distinct.
 6. `## Claim ledger`: claim, excerpt, source, status, and caveat.
 7. `## Product-data coverage`: present, missing, or uncheckable fields.
