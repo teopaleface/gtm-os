@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ghid complet, simplu si practic pentru GTM Skillathon 2026.">
+  <title>GTM Skillathon / ghid de pregătire</title>
+  <style>
+    :root {
+      --ink: #151922;
+      --muted: #6d7280;
+      --paper: #f4f1ea;
+      --paper-2: #fbfaf7;
+      --line: #ddd9d0;
+      --blue: #4b5fe3;
+      --blue-dark: #293475;
+      --blue-soft: #e7eaff;
+      --coral: #dc6e58;
+      --green: #397963;
+      --yellow: #f0c66e;
+      --shadow: 0 18px 45px rgba(29, 32, 44, .08);
+      --radius: 18px;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      line-height: 1.58;
+    }
+    a { color: var(--blue-dark); }
+    a:hover { color: var(--coral); }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: fixed; top: 10px; left: 10px; z-index: 20; padding: 10px 14px; border-radius: 9px; color: white; background: var(--ink); transform: translateY(-160%); }
+    .skip-link:focus { transform: translateY(0); }
+
+    .topline { height: 8px; background: var(--blue); }
+    .shell { width: min(1420px, calc(100% - 40px)); margin: 0 auto; }
+    .hero {
+      padding: 66px 0 48px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+      gap: 48px;
+      align-items: end;
+    }
+    .eyebrow, .section-label {
+      color: var(--blue);
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { letter-spacing: -.035em; line-height: 1.04; }
+    h1 { max-width: 780px; margin: 16px 0 20px; font-size: clamp(3rem, 7vw, 6.8rem); }
+    h2 { margin: 10px 0 18px; font-size: clamp(2rem, 4vw, 3.7rem); }
+    h3 { margin: 0 0 12px; font-size: 1.35rem; }
+    .hero p { max-width: 760px; color: var(--muted); font-size: clamp(1.05rem, 1.8vw, 1.35rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      color: var(--ink);
+      background: transparent;
+      text-decoration: none;
+      font-weight: 750;
+      transition: transform .16s ease, background .16s ease, color .16s ease;
+    }
+    .button:hover { transform: translateY(-2px); color: white; background: var(--ink); }
+    .button.primary { color: white; border-color: var(--blue); background: var(--blue); }
+    .button.primary:hover { border-color: var(--blue-dark); background: var(--blue-dark); }
+    .hero-card {
+      padding: 26px;
+      border: 1px solid rgba(75, 95, 227, .25);
+      border-radius: var(--radius);
+      background: var(--blue-soft);
+      box-shadow: var(--shadow);
+    }
+    .hero-card strong { display: block; margin: 7px 0 8px; font-size: 1.5rem; line-height: 1.15; }
+    .hero-card p { margin: 0; color: var(--blue-dark); font-size: 1rem; }
+    .hero-card .mini { margin-top: 18px; color: var(--muted); font-size: .86rem; }
+
+    .layout { display: grid; grid-template-columns: 245px minmax(0, 1fr); gap: 44px; align-items: start; }
+    .sidebar { position: sticky; top: 20px; padding: 22px 0 28px; max-height: calc(100vh - 40px); overflow: auto; }
+    .sidebar-title { margin-bottom: 12px; color: var(--muted); font-size: .8rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .sidebar nav { display: grid; gap: 4px; }
+    .sidebar a { padding: 8px 10px; border-radius: 9px; color: var(--muted); font-size: .92rem; text-decoration: none; }
+    .sidebar a:hover, .sidebar a.active { color: var(--blue-dark); background: var(--blue-soft); }
+    .progress-box { margin-top: 22px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-2); }
+    .progress-row { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .82rem; }
+    .progress-bar { height: 7px; margin-top: 10px; overflow: hidden; border-radius: 999px; background: var(--line); }
+    .progress-fill { width: 0; height: 100%; background: var(--coral); transition: width .2s ease; }
+    .reset-progress { margin-top: 10px; padding: 0; border: 0; color: var(--blue-dark); background: transparent; font-size: .78rem; text-decoration: underline; }
+    .main { min-width: 0; padding-bottom: 90px; }
+    .section { padding: 76px 0 18px; scroll-margin-top: 20px; }
+    .section + .section { border-top: 1px solid var(--line); }
+    .lede { max-width: 760px; color: var(--muted); font-size: 1.07rem; }
+    .callout { margin: 24px 0; padding: 22px 24px; border-left: 5px solid var(--blue); border-radius: 0 var(--radius) var(--radius) 0; background: var(--blue-soft); }
+    .callout.coral { border-color: var(--coral); background: #f8e7e1; }
+    .callout.green { border-color: var(--green); background: #e4f0eb; }
+    .callout p:last-child { margin-bottom: 0; }
+    .quote { margin: 18px 0; font-family: var(--serif); font-size: 1.35rem; line-height: 1.25; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 24px 0; }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-2); box-shadow: 0 7px 20px rgba(29, 32, 44, .035); }
+    .card h3 { margin-top: 0; }
+    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+    .kicker { color: var(--coral); font-size: .78rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .score { display: inline-flex; align-items: center; height: 32px; padding: 0 11px; border-radius: 999px; color: white; background: var(--blue); font-weight: 850; }
+    .project-card { position: relative; overflow: hidden; }
+    .project-card::after { position: absolute; right: -34px; bottom: -48px; width: 130px; height: 130px; border-radius: 50%; background: rgba(75, 95, 227, .06); content: ''; }
+    .project-head { display: flex; justify-content: space-between; gap: 15px; align-items: start; }
+    .project-head h3 { margin-bottom: 5px; }
+    details { border-top: 1px solid var(--line); }
+    details:first-of-type { border-top: 0; }
+    summary { padding: 15px 0; cursor: pointer; list-style: none; font-weight: 800; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { float: right; color: var(--blue); content: '+'; font-size: 1.35rem; }
+    details[open] summary::after { content: '−'; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    ul, ol { padding-left: 1.2rem; }
+    li + li { margin-top: 7px; }
+    .timeline { display: grid; gap: 10px; margin: 24px 0; }
+    .timeline-item { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-2); }
+    .timeline-time { color: var(--blue); font-weight: 850; }
+    table { width: 100%; margin: 24px 0; border-collapse: collapse; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-2); }
+    th, td { padding: 13px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: white; background: var(--ink); font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    code { padding: 2px 5px; border-radius: 5px; color: var(--blue-dark); background: var(--blue-soft); font-family: var(--mono); font-size: .9em; }
+    pre { position: relative; margin: 18px 0; padding: 20px; overflow-x: auto; border-radius: 14px; color: #edf0ff; background: #1c2130; font-family: var(--mono); font-size: .86rem; line-height: 1.65; }
+    .copy { position: absolute; top: 10px; right: 10px; padding: 6px 10px; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; color: white; background: transparent; font-size: .76rem; }
+    .copy:hover { background: rgba(255,255,255,.15); }
+    dl { margin: 0; }
+    dt { margin-top: 16px; }
+    dt:first-child { margin-top: 0; }
+    dd { margin: 4px 0 0; color: var(--muted); }
+    .search-wrap { display: flex; gap: 10px; align-items: center; margin: 24px 0; }
+    .search-wrap input { width: min(440px, 100%); padding: 12px 15px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--paper-2); }
+    .search-note { color: var(--muted); font-size: .86rem; }
+    .checklist { display: grid; gap: 9px; margin: 18px 0; }
+    .check { display: flex; gap: 11px; align-items: flex-start; padding: 11px 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--paper-2); }
+    .check input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--coral); }
+    .check:has(input:checked) { color: var(--muted); text-decoration: line-through; background: #efeee9; }
+    .source-list { display: grid; gap: 7px; padding-left: 1.1rem; }
+    .footer { padding: 32px 0 55px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+    .footer strong { color: var(--ink); }
+    .hide { display: none !important; }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; gap: 22px; }
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; max-height: none; padding: 20px 0 0; }
+      .sidebar nav { display: flex; flex-wrap: wrap; }
+      .progress-box { max-width: 420px; }
+    }
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 24px, 1420px); }
+      .hero { padding-top: 42px; }
+      h1 { font-size: clamp(2.6rem, 15vw, 4.5rem); }
+      .grid, .grid.three, .two-col { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 3px; }
+      table { table-layout: fixed; }
+      th, td { padding: 10px; font-size: .9rem; overflow-wrap: anywhere; word-break: break-word; }
+      pre { white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
+      pre code { white-space: inherit; overflow-wrap: anywhere; }
+      .section { padding-top: 54px; }
+    }
+    @media print {
+      .topline, .sidebar, .hero-actions, .search-wrap, .copy { display: none !important; }
+      .shell { width: 100%; }
+      .hero { display: block; padding: 20px 0; }
+      .layout { display: block; }
+      .section { padding: 24px 0; break-inside: avoid; }
+      .card, .callout, table, pre { box-shadow: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Sari la conținut</a>
+  <div class="topline"></div>
+  <header class="shell hero">
+    <div>
+      <div class="eyebrow">GTM Skillathon / ghid de pregătire</div>
+      <h1>Înțelege problema. Construiește ceva mic. Arată că funcționează.</h1>
+      <p>Un ghid pentru cineva care pornește de la zero cu GTM, Codex, Apify și agent skills. Fără presupunerea că știi programare sau marketing.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#start">Începe de aici</a>
+        <a class="button" href="#roadmap">Vezi roadmap-ul</a>
+        <button class="button" id="printBtn" type="button">Printează ghidul</button>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <div class="kicker">Recomandarea mea</div>
+      <strong>ProofGap Lite</strong>
+      <p>Verifică ce promite un competitor și ce spun clienții lui. Arată o diferență doar când există dovezi suficiente.</p>
+      <p class="mini">Ținta este un workflow mic, repetabil și ușor de demonstrat în trei minute.</p>
+    </aside>
+  </header>
+
+  <div class="shell layout">
+    <aside class="sidebar" aria-label="Navigare în ghid">
+      <div class="sidebar-title">Pe scurt</div>
+      <nav>
+        <a href="#start">Start aici</a>
+        <a href="#gtm">Ce este GTM</a>
+        <a href="#event">Evenimentul</a>
+        <a href="#pieces">Cele 4 piese</a>
+        <a href="#themes">Temele</a>
+        <a href="#ideas">Ideile din PDF</a>
+        <a href="#choice">Alegerea proiectului</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#event-plan">Seara evenimentului</a>
+        <a href="#prompts">Prompts</a>
+        <a href="#review">Review de locul 1</a>
+        <a href="#checklist">Checklist</a>
+      </nav>
+      <div class="progress-box">
+        <div class="progress-row"><span>Pregătirea ta</span><strong id="progressText" aria-live="polite">0%</strong></div>
+        <div class="progress-bar" role="progressbar" aria-label="Progresul checklist-ului" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
+        <p class="search-note">Bifează pașii de jos. Progresul rămâne în browserul tău.</p>
+        <button class="reset-progress" id="resetProgress" type="button">Resetează progresul</button>
+      </div>
+    </aside>
+
+    <main class="main" id="main">
+      <section class="section" id="start" data-search="start ghid recomandare proofgap">
+        <div class="section-label">01 / dacă citești doar o pagină</div>
+        <h2>Nu trebuie să construiești un produs mare.</h2>
+        <p class="lede">Trebuie să construiești o skill reutilizabilă care face un singur job real de marketing sau vânzări, folosește date actuale de pe internet și are teste care arată când răspunsul este bun sau greșit.</p>
+        <div class="callout">
+          <p class="quote">"ProofGap Lite verifică ce promite un competitor și ce spun clienții lui. Arată o diferență doar când există dovezi suficiente."</p>
+          <p>Asta este propunerea de proiect. Restul ghidului îți explică fiecare cuvânt din ea.</p>
+        </div>
+        <div class="grid three">
+          <article class="card"><div class="kicker">Problema</div><h3>Promisiuni versus realitate</h3><p>Competitorii promit lucruri. Clienții descriu experiențe. Uneori cele două nu se potrivesc.</p></article>
+          <article class="card"><div class="kicker">Munca AI-ului</div><h3>Caută și compară</h3><p>Skill-ul colectează dovezi, le leagă de promisiuni și separă faptele de presupuneri.</p></article>
+          <article class="card"><div class="kicker">Rezultatul</div><h3>O decizie de vânzări</h3><p>Produce un battlecard, o întrebare bună sau spune simplu că nu există suficiente dovezi.</p></article>
+        </div>
+        <div class="callout green"><p><strong>Gata când:</strong> poți spune într-o propoziție cine folosește rezultatul și ce decizie ia cu el.</p></div>
+      </section>
+
+      <section class="section" id="gtm" data-search="gtm go to market marketing sales vânzări produs client">
+        <div class="section-label">02 / baza</div>
+        <h2>GTM înseamnă cum ajunge produsul la clienți.</h2>
+        <p class="lede">GTM vine de la "go-to-market". Înseamnă tot ce faci ca un produs să ajungă la oamenii potriviți, să fie cumpărat, folosit și păstrat.</p>
+        <p>Imaginează-ți că ai o aplicație care automatizează facturile unei firme. GTM răspunde la întrebări simple:</p>
+        <div class="grid">
+          <article class="card"><h3>Cui vinzi?</h3><p>Care firme sau persoane au problema? Cine ia decizia? Cine folosește produsul?</p></article>
+          <article class="card"><h3>Ce problemă rezolvi?</h3><p>Ce îi costă timp, bani, clienți sau energie? De ce ar căuta o soluție?</p></article>
+          <article class="card"><h3>Cum ajungi la ei?</h3><p>Prin conținut, căutări, reclame, recomandări, evenimente sau contact direct?</p></article>
+          <article class="card"><h3>De ce te-ar alege?</h3><p>Ce faci mai bine, mai simplu, mai repede sau mai sigur decât alternativele?</p></article>
+        </div>
+        <p>GTM include marketing, vânzări, onboarding, customer success, pricing, poziționare și analiză competitivă.</p>
+        <div class="callout coral"><p><strong>De ce contează?</strong> Poți avea un produs bun și să nu-l cumpere nimeni dacă nu știi cui îl vinzi sau nu explici problema corect. Un produs mai simplu, dar bine poziționat și vândut, poate câștiga piața.</p></div>
+        <details><summary>Dicționarul de bază</summary>
+          <table><thead><tr><th>Termen</th><th>Ce înseamnă</th></tr></thead><tbody>
+            <tr><td>ICP</td><td>Clientul ideal pentru produsul tău.</td></tr>
+            <tr><td>Persona</td><td>Un tip de persoană din ICP, de exemplu fondatorul sau directorul de vânzări.</td></tr>
+            <tr><td>Signal</td><td>Un indiciu că ceva s-a schimbat.</td></tr>
+            <tr><td>Why now</td><td>Motivul pentru care merită să acționezi acum.</td></tr>
+            <tr><td>Outreach</td><td>Contactarea unui potențial client.</td></tr>
+            <tr><td>Churn</td><td>Clientul renunță la produs.</td></tr>
+            <tr><td>Claim</td><td>Ce promite sau afirmă un competitor.</td></tr>
+            <tr><td>Evidence</td><td>Dovada concretă: fragment, URL și dată.</td></tr>
+            <tr><td>Battlecard</td><td>Fișă scurtă pentru vânzări despre un competitor.</td></tr>
+            <tr><td>Eval</td><td>Test care verifică dacă agentul a lucrat corect.</td></tr>
+          </tbody></table>
+        </details>
+        <div class="callout green"><p><strong>Gata când:</strong> poți explica fără jargon ce face fiecare dintre cele patru piese și ai rulat un smoke test mic.</p></div>
+      </section>
+
+      <section class="section" id="event" data-search="eveniment hackathon data program premii builders house codex apify">
+        <div class="section-label">03 / evenimentul</div>
+        <h2>Un hackathon de o seară, cu un job real.</h2>
+        <p class="lede">GTM Skillathon are loc pe 28 august 2026 la Builders House, București. Build-ul este între 18:00 și 21:00, apoi urmează demo-urile.</p>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-time">17:00</div><div><strong>Doors și check-in</strong><br>Verifici internetul, Codex, Apify și regulile.</div></div>
+          <div class="timeline-item"><div class="timeline-time">17:30</div><div><strong>Welcome și demo Codex</strong><br>Vezi workflow-ul de build și evaluare.</div></div>
+          <div class="timeline-item"><div class="timeline-time">18:00</div><div><strong>Build</strong><br>Începe proiectul propriu-zis.</div></div>
+          <div class="timeline-item"><div class="timeline-time">21:00</div><div><strong>Demo-uri</strong><br>Trebuie să ai ceva care poate fi rulat și explicat.</div></div>
+          <div class="timeline-item"><div class="timeline-time">21:45</div><div><strong>Launch party</strong></div></div>
+          <div class="timeline-item"><div class="timeline-time">22:30</div><div><strong>Închidere</strong></div></div>
+        </div>
+        <div class="grid three">
+          <article class="card"><div class="kicker">Locul 1</div><h3>2.000 USD în credite</h3><p>1.000 USD OpenAI API, 1.000 USD Apify și 3 luni de ChatGPT Pro.</p></article>
+          <article class="card"><div class="kicker">Locul 2</div><h3>500 USD în credite</h3><p>Credite OpenAI API și 3 luni de ChatGPT Pro.</p></article>
+          <article class="card"><div class="kicker">Pentru participanți</div><h3>Credite de lucru</h3><p>Pagina menționează credite Codex, OpenAI API și Apify pentru participanții aprobați.</p></article>
+        </div>
+        <div class="callout green"><p>Organizatorii spun că nu ai nevoie să fi construit o skill sau să fi folosit Codex înainte. Ai nevoie de o problemă reală pe care vrei să o automatizezi.</p></div>
+        <div class="card"><h3>Ce să ai la tine</h3><ul><li>laptop și încărcător;</li><li>acces la Codex și Apify;</li><li>o problemă GTM concretă;</li><li>un coding agent pe care îl poți folosi;</li><li>întrebarea despre regulile de pre-build.</li></ul></div>
+        <p>Surse: <a href="https://luma.com/82q9aclg" target="_blank" rel="noreferrer">pagina oficială Luma</a> și <a href="https://developers.openai.com/community/meetups?city=Bucharest" target="_blank" rel="noreferrer">lista OpenAI pentru București</a>.</p>
+      </section>
+
+      <section class="section" id="pieces" data-search="skill codex apify eval agent mcp">
+        <div class="section-label">04 / cum funcționează</div>
+        <h2>Cele patru piese ale proiectului.</h2>
+        <div class="grid">
+          <article class="card"><div class="kicker">01 / skill</div><h3>Rețeta de lucru</h3><p>Instrucțiuni reutilizabile pentru un singur job. Îi spun agentului ce input primește, ce pași urmează și cum arată un rezultat bun.</p></article>
+          <article class="card"><div class="kicker">02 / Codex</div><h3>Agentul care construiește</h3><p>Te ajută să scrii fișierele, să conectezi instrumente, să rulezi teste și să repari probleme.</p></article>
+          <article class="card"><div class="kicker">03 / Apify</div><h3>Datele actuale</h3><p>Aduce pagini, rezultate, review-uri sau joburi publice de pe internet. Actorii sunt instrumentele lui.</p></article>
+          <article class="card"><div class="kicker">04 / eval</div><h3>Testul de adevăr</h3><p>Verifică dacă agentul a găsit sursa corectă, nu a inventat, a respectat formatul și s-a oprit când datele nu ajung.</p></article>
+        </div>
+        <div class="callout"><p class="quote">Codex este creierul. Apify aduce informația. Skill-ul este procedura. Eval-ul este testul.</p></div>
+        <details><summary>Cum le folosești dacă pornești de la zero</summary>
+          <p>Gândește-te la Codex ca la un coleg tehnic, la <code>SKILL.md</code> ca la fișa de lucru, la Apify ca la cercetătorul care aduce date și la eval ca la testul de calitate.</p>
+          <ol><li>Deschizi workspace-ul.</li><li>Ceri planul înainte de build.</li><li>Verifici inputul, output-ul și regulile din <code>SKILL.md</code>.</li><li>Rulezi un caz mic și citești sursele.</li><li>Compari rezultatul cu ce trebuia să obții.</li><li>Repari instrucțiunile și repeți.</li></ol>
+          <p>O skill nu este o aplicație mare. Este un contract de lucru: ce primește agentul, ce face, când se oprește și ce returnează.</p>
+        </details>
+        <p>Documentația OpenAI descrie skill-urile ca workflow-uri reutilizabile pentru sarcini specifice. <a href="https://developers.openai.com/codex/skills" target="_blank" rel="noreferrer">Vezi documentația oficială</a>. Apify poate conecta instrumente externe la agenți prin MCP. <a href="https://docs.apify.com/integrations/mcp" target="_blank" rel="noreferrer">Vezi Apify MCP</a>.</p>
+        <details><summary>Configurarea minimă înainte de build</summary>
+          <ol><li>Verifică accesul la Codex și la proiect.</li><li>Verifică accesul la Apify și creditele.</li><li>Rulează un singur Actor pe o singură căutare.</li><li>Pregătește un fallback local dacă sursa sau internetul cade.</li></ol>
+          <p>Apify are un MCP găzduit la <code>https://mcp.apify.com</code>. Tokenul este secret: nu îl pune în <code>SKILL.md</code>, în eval-uri sau în capturi de ecran.</p>
+          <pre><button class="copy" type="button">Copiază</button><code>Rulează un singur Actor Apify pe o singură căutare. Arată-mi datele primite,
+URL-ul sursei și ce ai face dacă sursa nu răspunde. Nu construi încă aplicația.</code></pre>
+        </details>
+        <details><summary>Limitele datelor publice</summary>
+          <p>Review-urile nu reprezintă toți clienții. Joburile indică o schimbare, dar nu dovedesc bugetul. Un preț poate fi vechi. Un scraper care a eșuat nu înseamnă că informația nu există.</p>
+          <p>Separă în output <strong>faptul</strong>, <strong>interpretarea</strong> și <strong>acțiunea</strong>. Skill-ul nu trimite emailuri, nu scrie în CRM și nu postează fără confirmare umană.</p>
+        </details>
+      </section>
+
+      <section class="section" id="themes" data-search="ai search growth churn icp virality orchestration teme">
+        <div class="section-label">05 / direcțiile oficiale</div>
+        <h2>Ce poți construi la eveniment.</h2>
+        <div class="grid">
+          <article class="card"><h3>AI search visibility</h3><p>Verifici dacă brandul apare în răspunsurile AI la întrebări reale de cumpărare.</p></article>
+          <article class="card"><h3>Growth 1:1</h3><p>Adaptezi outreach-ul sau onboarding-ul la fiecare companie, în funcție de ce se întâmplă cu ea.</p></article>
+          <article class="card"><h3>Churn</h3><p>Cauți semne că un client s-ar putea să plece. Datele publice sunt doar indicii, nu dovada churn-ului.</p></article>
+          <article class="card"><h3>ICP twins</h3><p>Construiești cumpărători simulați pe baza unor date și îi folosești pentru a critica un mesaj.</p></article>
+          <article class="card"><h3>Product-led virality</h3><p>Cauți momente în care produsul poate crește prin invitații, distribuire sau recomandări.</p></article>
+          <article class="card"><h3>GTM orchestration</h3><p>Construiești un agent care coordonează agenți specializați. Riscă să devină infrastructură fără rezultat.</p></article>
+        </div>
+        <p>Poți veni și cu o problemă proprie. Asta este direcția pe care o folosim pentru ProofGap.</p>
+      </section>
+
+      <section class="section" id="ideas" data-search="proofgap why now radar lost demand miner icp jury ai auditor proiecte pdf">
+        <div class="section-label">06 / ideile din PDF</div>
+        <h2>Ce înseamnă fiecare, fără jargon.</h2>
+        <div class="search-wrap"><input id="ideaSearch" type="search" placeholder="Caută: review, buyer, competitor..." aria-label="Caută în ideile de proiect"><span class="search-note" id="searchNote" aria-live="polite">5 idei</span></div>
+        <div id="projectList">
+          <article class="card project-card searchable" data-search="proofgap competitor review claim evidence battlecard gap">
+            <div class="project-head"><div><div class="kicker">Locul 1 / recomandarea mea</div><h3>ProofGap</h3></div><span class="score">9,3</span></div>
+            <p><strong>Ideea:</strong> compari ce promite un competitor cu ce spun clienții lui în review-uri sau conversații publice.</p>
+            <details><summary>Cum ar funcționa</summary><ol><li>Extrage promisiuni de pe homepage, pricing și feature pages.</li><li>Caută review-uri publice relevante.</li><li>Leagă fiecare review de promisiunea potrivită.</li><li>Separă faptul de interpretare.</li><li>Returnează un battlecard doar dacă dovezile ajung.</li></ol></details>
+            <details><summary>Exemplu</summary><p>Competitorul spune "setup în 5 minute". Doi clienți independenți descriu implementări de săptămâni. Skill-ul nu spune că competitorul minte. Spune că există un posibil gap și recomandă o întrebare de validare.</p></details>
+            <details><summary>Riscul și soluția</summary><p>Două review-uri nu reprezintă toți clienții. Folosește etichete precum <code>EVIDENCE_GAP</code> sau <code>INSUFFICIENT_EVIDENCE</code>. Nu folosi concluzii absolute.</p></details>
+          </article>
+          <article class="card project-card searchable" data-search="why now radar signal sales outbound jobs launch expansion timing">
+            <div class="project-head"><div><div class="kicker">Locul 2 / mai simplu tehnic</div><h3>Why-Now Radar</h3></div><span class="score">9,1</span></div>
+            <p><strong>Ideea:</strong> găsești motivul pentru care o companie ar putea cumpăra chiar acum.</p>
+            <details><summary>Semnale posibile</summary><p>Joburi noi, lansări, finanțare, extindere, schimbări de pricing, poziționare nouă sau o problemă publică.</p></details>
+            <details><summary>Riscul</summary><p>Poate deveni un generator de emailuri. Diferențiatorul trebuie să fie decizia <code>GO</code>, <code>MONITOR</code> sau <code>NO-GO</code>.</p></details>
+          </article>
+          <article class="card project-card searchable" data-search="lost demand miner complaints demand reviews forum marketing product">
+            <div class="project-head"><div><div class="kicker">Locul 3 / fallback bun</div><h3>Lost Demand Miner</h3></div><span class="score">8,9</span></div>
+            <p><strong>Ideea:</strong> găsești probleme și cereri exprimate public de cumpărători și le transformi în idei de produs sau campanii.</p>
+            <details><summary>Exemplu</summary><p>Mai mulți oameni caută o alternativă mai ieftină pentru firme mici. Skill-ul grupează cererea și propune un mesaj sau o pagină.</p></details>
+            <details><summary>Riscul</summary><p>Clustering-ul poate produce categorii vagi. Fiecare grup trebuie formulat ca o problemă concretă și susținut de dovezi.</p></details>
+          </article>
+          <article class="card project-card searchable" data-search="evidence backed icp jury synthetic persona buyer message landing page">
+            <div class="project-head"><div><div class="kicker">Locul 4 / demo original</div><h3>Evidence-Backed ICP Jury</h3></div><span class="score">8,5</span></div>
+            <p><strong>Ideea:</strong> construiești cumpărători simulați din date reale și îi pui să critice un mesaj sau o pagină.</p>
+            <details><summary>Riscul</summary><p>Un AI care joacă rolul unui buyer nu este un buyer real. Separă observațiile de simulare și spune clar ce trebuie validat cu oameni.</p></details>
+          </article>
+          <article class="card project-card searchable" data-search="ai search visibility auditor seo aeo geo citations competitor brand">
+            <div class="project-head"><div><div class="kicker">Locul 5 / temă clară</div><h3>AI Search Visibility Auditor</h3></div><span class="score">8,0</span></div>
+            <p><strong>Ideea:</strong> verifici dacă un brand apare în răspunsurile AI și ce surse citează competitorii.</p>
+            <details><summary>Riscul</summary><p>Este o categorie probabil aglomerată, iar rezultatele pot varia. Un simplu raport nu ajunge. Trebuie să propui ce pagină sau mențiune merită câștigată prima.</p></details>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="choice" data-search="alegere proofgap lite proiect locul 1 input output">
+        <div class="section-label">07 / alegerea proiectului</div>
+        <h2>Eu aș alege ProofGap Lite.</h2>
+        <p class="lede">Nu încerca să verifici tot internetul. Pentru concurs ai nevoie de un competitor, câteva dovezi, o concluzie prudentă și un rezultat pe care îl poate folosi o echipă de vânzări.</p>
+        <div class="two-col">
+          <article class="card"><div class="kicker">Input</div><h3>Ce primește skill-ul</h3><ul><li>URL-ul competitorului;</li><li>produsul tău;</li><li>tipul de client vizat;</li><li>paginile sau promisiunile pe care vrei să le verifici.</li></ul></article>
+          <article class="card"><div class="kicker">Output</div><h3>Ce returnează</h3><ul><li>promisiunea competitorului;</li><li>dovezile clienților;</li><li>URL și dată;</li><li>tipul de gap;</li><li>nivelul de încredere;</li><li>o întrebare sau acțiune de vânzări.</li></ul></article>
+        </div>
+        <table><thead><tr><th>Rezultat</th><th>Ce înseamnă</th><th>Ce face agentul</th></tr></thead><tbody>
+          <tr><td><code>SUPPORTED</code></td><td>Promisiunea are dovezi care o susțin.</td><td>Nu inventează o problemă.</td></tr>
+          <tr><td><code>EVIDENCE_GAP</code></td><td>Există o diferență sau o problemă posibilă.</td><td>Propune o întrebare sau un unghi de poziționare.</td></tr>
+          <tr><td><code>INSUFFICIENT_EVIDENCE</code></td><td>Nu există destule date.</td><td>Se oprește și spune ce lipsește.</td></tr>
+          <tr><td><code>SOURCE_ERROR</code></td><td>O pagină nu a putut fi citită.</td><td>Nu tratează eroarea ca pe absența dovezii.</td></tr>
+        </tbody></table>
+        <div class="callout coral"><p><strong>Nu spune "competitorul este prost".</strong> Spune "există o diferență între promisiunea publică și dovezile găsite. Este suficient pentru validare, nu pentru o generalizare despre toți clienții".</p></div>
+        <details><summary>Exemplu de output verificabil</summary>
+          <pre><button class="copy" type="button">Copiază</button><code>{
+  "competitor": "Competitor A",
+  "claim": "Setup în 5 minute",
+  "status": "EVIDENCE_GAP",
+  "confidence": "medium",
+  "evidence": [{
+    "source_type": "customer_review",
+    "quote": "Implementarea a durat aproximativ trei săptămâni.",
+    "url": "https://competitor.invalid/review/123",
+    "published_at": "2026-08-01"
+  }],
+  "interpretation": "Există o diferență posibilă între promisiune și experiență.",
+  "sales_action": "Întreabă prospectul cât timp poate aloca implementării.",
+  "limitations": ["Un singur review nu este reprezentativ."]
+}</code></pre>
+          <p>URL-ul este fictiv. Ce contează este schema: sursă, dată, status, limitare și acțiune.</p>
+        </details>
+        <div class="callout green"><p><strong>Gata când:</strong> ai un input clar, un output repetabil și știi exact când skill-ul trebuie să spună "nu știm".</p></div>
+      </section>
+
+      <section class="section" id="roadmap" data-search="roadmap pregatire faza skill eval fixtures training">
+        <div class="section-label">08 / planul complet</div>
+        <h2>Roadmap-ul tău, pas cu pas.</h2>
+        <p class="lede">Nu sări direct la cod. Mai întâi clarifici problema, apoi faci manual, apoi automatizezi și abia la final lustruiești demo-ul.</p>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-time">Faza 0</div><div><strong>Înțelege problema</strong><br>Poți explica proiectul într-o propoziție? Dacă nu, nu construi încă.</div></div>
+          <div class="timeline-item"><div class="timeline-time">Faza 1</div><div><strong>Alege cazul de test</strong><br>Un competitor, un segment, câteva pagini publice.</div></div>
+          <div class="timeline-item"><div class="timeline-time">Faza 2</div><div><strong>Fă analiza manual</strong><br>Găsește promisiuni, review-uri, legături și lipsa dovezilor.</div></div>
+          <div class="timeline-item"><div class="timeline-time">Faza 3</div><div><strong>Pregătește skill-ul</strong><br><code>SKILL.md</code>, input, pași, output și reguli de abstention.</div></div>
+          <div class="timeline-item"><div class="timeline-time">Faza 4</div><div><strong>Scrie eval-urile</strong><br>Cazuri pozitive, negative, ambigue, vechi și cu eroare.</div></div>
+          <div class="timeline-item"><div class="timeline-time">Faza 5</div><div><strong>Repetă demo-ul</strong><br>Problema, run live, rezultat, caz negativ, eval.</div></div>
+          <div class="timeline-item"><div class="timeline-time">Faza 6</div><div><strong>Pregătește fallback-ul</strong><br>Dacă o sursă cade, poți arăta totuși rezultatul și testele.</div></div>
+        </div>
+        <div class="grid three">
+          <article class="card"><div class="kicker">Antrenament 1</div><h3>Why-Now simplu</h3><p>Alege o companie, găsește un singur semnal public și scrie ce ar putea însemna. Înveți diferența dintre semnal și concluzie.</p></article>
+          <article class="card"><div class="kicker">Antrenament 2</div><h3>Lost Demand mic</h3><p>Adună zece întrebări sau plângeri publice și grupează-le în cel mult trei probleme. Înveți să nu inventezi categorii.</p></article>
+          <article class="card"><div class="kicker">Antrenament 3</div><h3>ProofGap Lite</h3><p>Compară trei promisiuni cu cinci dovezi și returnează <code>SUPPORTED</code>, <code>EVIDENCE_GAP</code> sau <code>INSUFFICIENT_EVIDENCE</code>.</p></article>
+        </div>
+        <div class="callout green"><p><strong>Ordinea de pregătire:</strong> terminologie, analiză manuală, skill și eval-uri, apoi demo și fallback. Nu încerca să înveți tot Codex-ul înainte să ai un caz concret.</p></div>
+        <details open><summary>Structura minimă a skill-ului</summary>
+          <pre><button class="copy" type="button">Copiază</button><code>proofgap/
+  SKILL.md
+  references/
+    output-schema.md
+    evaluation-rubric.md
+  scripts/
+    validate-output.py
+  fixtures/
+    positive-case.json
+    negative-case.json</code></pre>
+          <p>Nu ai nevoie de toate fișierele din prima. <code>SKILL.md</code> este piesa esențială. Restul te ajută să repeți testele.</p>
+        </details>
+        <details><summary>Ce trebuie să conțină SKILL.md</summary><ul><li>Când se activează skill-ul.</li><li>Ce input primește.</li><li>Ce surse folosește.</li><li>Cum separă faptele de interpretări.</li><li>Când produce un gap și când se abține.</li><li>Cum arată output-ul.</li><li>Ce acțiuni externe nu are voie să facă.</li></ul></details>
+        <h3>Eval-urile minime</h3>
+        <p>Pregătește cel puțin opt cazuri: trei cu gap real, două fără gap, unul ambiguu, unul cu date vechi și unul cu sursă indisponibilă.</p>
+        <table><thead><tr><th>Verificare</th><th>Întrebarea simplă</th></tr></thead><tbody>
+          <tr><td>Compania</td><td>A găsit compania corectă?</td></tr>
+          <tr><td>Dovezile</td><td>Are fiecare afirmație un link și un fragment?</td></tr>
+          <tr><td>Concluzia</td><td>A numit gap doar când există dovezi?</td></tr>
+          <tr><td>Prudența</td><td>A spus "nu știm" când datele nu ajung?</td></tr>
+          <tr><td>Utilitatea</td><td>Produce ceva folositor pentru vânzări?</td></tr>
+          <tr><td>Formatul</td><td>Returnează mereu aceleași câmpuri?</td></tr>
+        </tbody></table>
+        <div class="callout green"><p><strong>Gata când:</strong> poți rula un caz pozitiv și unul negativ, iar pentru fiecare poți arăta verdictul așteptat și dovezile.</p></div>
+        <details><summary>Calendar până la eveniment</summary>
+          <ul><li><strong>24 august:</strong> înțelege GTM-ul și alege segmentul plus competitorul.</li><li><strong>25 august:</strong> fă analiza manuală cu trei promisiuni și cinci dovezi.</li><li><strong>26 august:</strong> scrie <code>SKILL.md</code>, schema de output și primele opt fixture-uri.</li><li><strong>27 august:</strong> rulează totul de două ori, repară cazul negativ și pregătește fallback-ul.</li><li><strong>28 august:</strong> vino cu laptopul încărcat, încărcătorul, accesul la Codex și Apify.</li></ul>
+          <p>Dacă nu termini tot, păstrează ordinea: caz concret, output verificabil, eval negativ, demo.</p>
+        </details>
+      </section>
+
+      <section class="section" id="event-plan" data-search="event plan schedule build demo three hours seara">
+        <div class="section-label">09 / la eveniment</div>
+        <h2>Planul pentru cele trei ore.</h2>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-time">17:00-17:30</div><div>Verifică internetul, Codex, Apify și regulile. Întreabă ce înseamnă "gata".</div></div>
+          <div class="timeline-item"><div class="timeline-time">17:30-18:00</div><div>Urmărește demo-ul, dar nu schimba ideea doar pentru că vezi o funcție interesantă.</div></div>
+          <div class="timeline-item"><div class="timeline-time">18:00-18:20</div><div>Fixează inputul, output-ul și cazurile de eval.</div></div>
+          <div class="timeline-item"><div class="timeline-time">18:20-19:00</div><div>Conectează un singur Actor și verifică manual sursele.</div></div>
+          <div class="timeline-item"><div class="timeline-time">19:00-20:00</div><div>Scrie și ajustează skill-ul. Repară rezultatele greșite înainte de aspect.</div></div>
+          <div class="timeline-item"><div class="timeline-time">20:00-20:30</div><div>Rulează cazurile pozitive, negative și cu eroare.</div></div>
+          <div class="timeline-item"><div class="timeline-time">20:30-20:50</div><div>Repetă demo-ul cu cronometru.</div></div>
+          <div class="timeline-item"><div class="timeline-time">20:50-21:00</div><div>Îngheață versiunea. Nu mai adăuga funcții.</div></div>
+        </div>
+        <div class="callout"><p class="quote">Demo-ul ideal are cinci momente: problema, input-ul, datele live, rezultatul cu dovezi și cazul negativ.</p></div>
+        <p>Nu construi login, dashboard mare, CRM integration, trimitere automată de emailuri, LinkedIn automation, 20 de surse sau un sistem cu zece agenți.</p>
+        <div class="callout green"><p><strong>Gata când:</strong> poți rula demo-ul în mai puțin de trei minute și poți arăta ce se întâmplă când sursa nu răspunde.</p></div>
+      </section>
+
+      <section class="section" id="prompts" data-search="prompt codex instructiuni build eval review">
+        <div class="section-label">10 / prompts gata de folosit</div>
+        <h2>Ce îi poți spune lui Codex.</h2>
+        <p>Începe cu planul. Nu îi cere să construiască totul dintr-o singură propoziție.</p>
+        <pre><button class="copy" type="button">Copiază</button><code>Nu construi încă. Ajută-mă să definesc un singur job GTM pentru un hackathon
+de 3 ore. Proiectul meu se numește ProofGap. Vreau să verific promisiunile
+unui competitor folosind dovezi publice ale clienților. Explică-mi opțiunile
+în română simplă și spune-mi ce trebuie tăiat pentru un MVP.</code></pre>
+        <pre><button class="copy" type="button">Copiază</button><code>Construiește o agent skill numită ProofGap. Ea primește un competitor, un
+produs și un segment de clienți. Extrage promisiuni, caută dovezi publice,
+separă faptele de interpretări și returnează SUPPORTED, EVIDENCE_GAP,
+INSUFFICIENT_EVIDENCE sau SOURCE_ERROR. Nu inventa surse și nu trage
+concluzii dintr-un singur review. Înainte de implementare, arată-mi planul
+și ce vei exclude.</code></pre>
+        <pre><button class="copy" type="button">Copiază</button><code>Construiește eval-uri pentru ProofGap. Vreau cazuri pozitive, negative,
+ambigue, cu date vechi și cu sursă indisponibilă. Fiecare caz trebuie să
+verifice compania, URL-ul, dovada, concluzia, prudența și schema output-ului.
+Nu evalua doar cât de frumos sună răspunsul.</code></pre>
+        <pre><button class="copy" type="button">Copiază</button><code>Fă un review ca un juriu de hackathon. Întreabă-te dacă proiectul rezolvă
+un job GTM real, dacă datele sunt live, dacă skill-ul este reutilizabil,
+dacă eval-urile arată ceva măsurabil și dacă demo-ul poate eșua elegant.
+Spune-mi ce lipsește pentru locul 1. Nu adăuga feature-uri doar ca să pară
+mai mare.</code></pre>
+      </section>
+
+      <section class="section" id="review" data-search="review juriu locul 1 self review critic">
+        <div class="section-label">11 / testul sincer</div>
+        <h2>Întrebarea pe care trebuie să ți-o pui.</h2>
+        <div class="callout coral"><p class="quote">Dacă aș fi juriul, aș crede că acest proiect face muncă utilă sau doar generează text frumos?</p></div>
+        <details><summary>Întrebări probabile de la juriu</summary>
+          <dl><dt><strong>De ce nu este doar un chatbot?</strong></dt><dd>Are un job îngust, surse live, dovezi, o schemă stabilă și eval-uri care verifică inclusiv abținerea.</dd>
+          <dt><strong>Ce faci dacă datele sunt slabe?</strong></dt><dd>Returnezi <code>INSUFFICIENT_EVIDENCE</code> sau <code>SOURCE_ERROR</code>, fără să umpli golul cu presupuneri.</dd>
+          <dt><strong>Poți spune că un competitor nu își respectă promisiunea?</strong></dt><dd>Nu din câteva review-uri. Poți arăta un semnal și propune o întrebare de validare.</dd>
+          <dt><strong>Ce ai tăiat?</strong></dt><dd>Trimiterea automată de mesaje, CRM-ul, login-ul, dashboard-ul mare și analiza tuturor surselor.</dd>
+          <dt><strong>De ce Apify?</strong></dt><dd>Aduce date web actuale într-un format pe care agentul îl poate folosi. Un Actor care cade este marcat ca eroare, nu ca lipsă de dovadă.</dd>
+          <dt><strong>Ce ai măsurat?</strong></dt><dd>Compania, dovezile, statusul, schema output-ului și comportamentul pe date insuficiente.</dd></dl>
+        </details>
+        <p>Înainte de demo, verifică:</p>
+        <div class="checklist">
+          <label class="check"><input type="checkbox" data-check><span>Pot explica proiectul în 20 de secunde.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Este clar cine folosește rezultatul.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Rezolvă o problemă reală de vânzări sau marketing.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Folosește date actuale, nu doar text generat.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Fiecare afirmație importantă are dovadă.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Spune "nu știm" când dovezile sunt slabe.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Poate fi rulat pe un al doilea competitor.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Am un caz negativ în demo.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Am un fallback dacă sursa live cade.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Nu trimit sau public nimic fără confirmare umană.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Am tăiat funcțiile care nu ajută rezultatul principal.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Pot arăta ce am testat și ce rezultat am obținut.</span></label>
+          <label class="check"><input type="checkbox" data-check><span>Există o diferență față de un chatbot generic.</span></label>
+        </div>
+        <p>Dacă nu poți bifa primele cinci, nu mai lucra la culori sau layout. Repară proiectul.</p>
+      </section>
+
+      <section class="section" id="checklist" data-search="checklist final plecare laptop charger apify codex">
+        <div class="section-label">12 / plecarea la eveniment</div>
+        <h2>Checklist-ul final.</h2>
+        <div class="two-col">
+          <div class="card"><h3>Înainte</h3><div class="checklist"><label class="check"><input type="checkbox" data-check><span>Înțeleg ce înseamnă GTM.</span></label><label class="check"><input type="checkbox" data-check><span>Am o propoziție clară pentru proiect.</span></label><label class="check"><input type="checkbox" data-check><span>Am un competitor și un segment.</span></label><label class="check"><input type="checkbox" data-check><span>Am un caz pozitiv și unul negativ.</span></label><label class="check"><input type="checkbox" data-check><span>Am acces la Codex și Apify.</span></label><label class="check"><input type="checkbox" data-check><span>Am întrebat despre pre-build.</span></label></div></div>
+          <div class="card"><h3>La demo</h3><div class="checklist"><label class="check"><input type="checkbox" data-check><span>Am un run live.</span></label><label class="check"><input type="checkbox" data-check><span>Output-ul se citește ușor.</span></label><label class="check"><input type="checkbox" data-check><span>Linkurile și dovezile sunt vizibile.</span></label><label class="check"><input type="checkbox" data-check><span>Arăt și cazul negativ.</span></label><label class="check"><input type="checkbox" data-check><span>Pot spune ce nu face skill-ul.</span></label><label class="check"><input type="checkbox" data-check><span>Știu limita proiectului.</span></label></div></div>
+        </div>
+        <div class="callout green"><p><strong>Ținta reală:</strong> un rezultat mic, real și verificabil. Nu trebuie să pari că ai construit o companie într-o seară.</p></div>
+      </section>
+
+      <section class="section" id="sources">
+        <div class="section-label">Surse</div>
+        <h2>De unde vine informația.</h2>
+        <ul class="source-list">
+          <li><a href="https://luma.com/82q9aclg" target="_blank" rel="noreferrer">GTM Skillathon, pagina oficială</a></li>
+          <li><a href="https://developers.openai.com/community/meetups?city=Bucharest" target="_blank" rel="noreferrer">OpenAI Developers, meetups în București</a></li>
+          <li><a href="https://developers.openai.com/codex/skills" target="_blank" rel="noreferrer">OpenAI, Build skills</a></li>
+          <li><a href="https://docs.apify.com/integrations/mcp" target="_blank" rel="noreferrer">Apify MCP</a></li>
+          <li><a href="https://apify.com/apify/google-search-scraper" target="_blank" rel="noreferrer">Apify, Google Search Results Scraper</a></li>
+          <li><a href="/gtm-skillathon-top-5-idei-2.pdf">PDF-ul cu top 5 idei</a></li>
+          <li><a href="/design-skill-research.md">Cercetarea de design folosită la revizie</a></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <footer class="shell footer">
+    <strong>GTM Skillathon / ghid de pregătire</strong><br>
+    Scris simplu. Construit pentru a fi folosit, nu doar citit.
+  </footer>
+
+  <script>
+    (() => {
+      const storageKey = 'gtm-skillathon-roadmap-checks';
+      const checks = [...document.querySelectorAll('[data-check]')];
+      const progressBar = document.querySelector('.progress-bar');
+      let saved = [];
+      try {
+        saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      } catch {
+        saved = [];
+      }
+      checks.forEach((check, index) => {
+        check.checked = Boolean(saved[index]);
+        check.addEventListener('change', () => {
+          localStorage.setItem(storageKey, JSON.stringify(checks.map(item => item.checked)));
+          updateProgress();
+        });
+      });
+      function updateProgress() {
+        const done = checks.filter(item => item.checked).length;
+        const percent = checks.length ? Math.round(done / checks.length * 100) : 0;
+        document.querySelector('#progressText').textContent = `${percent}%`;
+        document.querySelector('#progressFill').style.width = `${percent}%`;
+        progressBar.setAttribute('aria-valuenow', String(percent));
+      }
+      updateProgress();
+
+      document.querySelector('#resetProgress').addEventListener('click', () => {
+        checks.forEach(check => { check.checked = false; });
+        localStorage.removeItem(storageKey);
+        updateProgress();
+      });
+
+      document.querySelector('#printBtn').addEventListener('click', () => window.print());
+
+      document.querySelectorAll('.copy').forEach(button => {
+        button.addEventListener('click', async () => {
+          const code = button.parentElement.querySelector('code');
+          try {
+            await navigator.clipboard.writeText(code.innerText);
+            const original = button.textContent;
+            button.textContent = 'Copiat';
+            window.setTimeout(() => { button.textContent = original; }, 1200);
+          } catch {
+            button.textContent = 'Selectează textul';
+          }
+        });
+      });
+
+      const search = document.querySelector('#ideaSearch');
+      const projects = [...document.querySelectorAll('.searchable')];
+      const note = document.querySelector('#searchNote');
+      search.addEventListener('input', () => {
+        const query = search.value.trim().toLowerCase();
+        let visible = 0;
+        projects.forEach(project => {
+          const match = !query || `${project.dataset.search} ${project.innerText}`.toLowerCase().includes(query);
+          project.classList.toggle('hide', !match);
+          if (match) visible += 1;
+        });
+        note.textContent = `${visible} ${visible === 1 ? 'idee' : 'idei'}`;
+      });
+
+      const links = [...document.querySelectorAll('.sidebar a')];
+      const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          links.forEach(link => {
+            const active = link.getAttribute('href') === `#${entry.target.id}`;
+            link.classList.toggle('active', active);
+            if (active) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      sections.forEach(section => observer.observe(section));
+    })();
+  </script>
+</body>
+</html>
