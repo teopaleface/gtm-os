@@ -42,7 +42,11 @@ ranking, or AI-citation predictions.
 | GEO: evidence and provenance | 3 | 1/4 | 0.75 | Performance claims are first-party claims without independent proof. |
 | GEO: buyer-question coverage | 3 | 2/4 | 1.50 | Battery and feature facts are present, but fit and policy questions remain. |
 | GEO: freshness and cross-surface consistency | 2 | 1/4 | 0.50 | Availability and policy details need a fresh, regional check. |
-| UX/accessibility/performance: all five criteria | 15 | U | 0 | The snapshot cannot establish these dimensions. |
+| UX: mobile layout and navigation | 3 | U | 0 | The snapshot cannot establish mobile layout or navigation. |
+| UX: interaction usability | 3 | U | 0 | The snapshot cannot establish variant, quantity, or error-state behavior. |
+| UX: accessibility basics | 3 | U | 0 | The snapshot cannot establish keyboard, focus, contrast, or dynamic names. |
+| UX: product media | 2 | U | 0 | The snapshot cannot establish media inspection quality. |
+| UX: performance and visual stability | 4 | U | 0 | The snapshot contains no dated lab or field performance evidence. |
 
 ## Arithmetic
 

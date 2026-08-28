@@ -163,15 +163,36 @@ coverage. Use these bands: 90-100 Excellent, 75-89 Strong, 60-74 Mixed,
 40-59 Weak, and 0-39 Critical. Round the overall and category scores to whole
 numbers before writing either output.
 
-Use these category weights and inspect the listed dimensions:
+Use these category and criterion weights. Do not invent equal weights when a
+criterion is not listed:
 
-| Category | Weight | Dimensions |
-|---|---:|---|
-| Conversion clarity and persuasion | 30 | offer, product detail, CTA/options, objections, scanability |
-| Purchase confidence and friction | 20 | price/availability, shipping, returns/warranty, proof, seller trust |
-| SEO discovery | 20 | crawl controls, title/description/heading, unique content, markup, images |
-| GEO and AI answer readiness | 15 | factual answerability, entity clarity, provenance, buyer questions, consistency |
-| UX, accessibility, and performance | 15 | mobile path, interactions, accessibility, media, speed/stability |
+| Category | Weight | Criterion | Criterion weight |
+|---|---:|---|---:|
+| Conversion clarity and persuasion | 30 | offer and audience clarity | 6 |
+| Conversion clarity and persuasion | 30 | product detail and benefit specificity | 7 |
+| Conversion clarity and persuasion | 30 | CTA and option selection | 6 |
+| Conversion clarity and persuasion | 30 | objection and fit handling | 6 |
+| Conversion clarity and persuasion | 30 | message hierarchy and scanability | 5 |
+| Purchase confidence and friction | 20 | price, currency, availability, and total-cost clarity | 5 |
+| Purchase confidence and friction | 20 | shipping and delivery | 4 |
+| Purchase confidence and friction | 20 | returns and warranty | 4 |
+| Purchase confidence and friction | 20 | reviews, ratings, and proof | 4 |
+| Purchase confidence and friction | 20 | seller and transaction trust | 3 |
+| SEO discovery | 20 | crawl and index controls | 4 |
+| SEO discovery | 20 | title, description, heading, and intent alignment | 4 |
+| SEO discovery | 20 | unique content and internal discovery | 4 |
+| SEO discovery | 20 | product structured data | 5 |
+| SEO discovery | 20 | image discovery | 3 |
+| GEO and AI answer readiness | 15 | factual answerability | 4 |
+| GEO and AI answer readiness | 15 | entity and variant clarity | 3 |
+| GEO and AI answer readiness | 15 | evidence and provenance | 3 |
+| GEO and AI answer readiness | 15 | buyer-question coverage | 3 |
+| GEO and AI answer readiness | 15 | freshness and cross-surface consistency | 2 |
+| UX, accessibility, and performance | 15 | mobile layout and navigation | 3 |
+| UX, accessibility, and performance | 15 | interaction usability | 3 |
+| UX, accessibility, and performance | 15 | accessibility basics | 3 |
+| UX, accessibility, and performance | 15 | product media | 2 |
+| UX, accessibility, and performance | 15 | performance and visual stability | 4 |
 
 In the score report, show each category's weight, quality score, coverage, and
 main finding, followed by the criterion ratings and short evidence notes. Cite
