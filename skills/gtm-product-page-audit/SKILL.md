@@ -7,8 +7,9 @@ description: "Score and audit one public e-commerce product page for conversion 
 
 Turn one public product page into a bounded pre-traffic decision. Keep the work
 read-only and separate what the page says from what the evidence supports. Every
-run creates two separate outputs: a plain-language report for a person and a
-structured audit for a downstream agent. The human report may summarize the
+run creates three separate outputs: a plain-language report for a person, a
+structured audit for a downstream agent, and a full score report with the
+category table and criterion ratings. The human report may summarize the
 audit, but it may not add a claim that is absent from it.
 
 Read `../../references/evidence-policy.md` and
@@ -37,7 +38,7 @@ deterministic fallback. Read `references/page-score.md` before scoring.
 
 Work on one product page. A public competitor page and a shopper query are
 optional comparison context, not extra permission to audit the whole market.
-If the user supplies no public product URL or usable snapshot, write both
+If the user supplies no public product URL or usable snapshot, write all three
 outputs with `NEEDS_INPUT`, name the exact missing input, and stop without
 guessing.
 
@@ -46,8 +47,10 @@ guessing.
 1. Resolve the output paths before research. The path named by the prompt is the
    agent-audit path. If no path is supplied, use
    `demo/output/product-page-audit.md`. Unless the prompt names a separate
-   human-report path, create `product-page-report.md` beside the agent audit. A
-   prompt that names only one output is still completed with both files.
+   human-report path, create `product-page-report.md` beside the agent audit.
+   Unless the prompt names a separate score-report path, create
+   `product-page-score.md` beside the agent audit. A prompt that names only one
+   output is still completed with all three files.
 2. Lock the product, audience, geography, query, and decision. Keep one page as
    the primary object and record the page URL and access date.
 3. Observe the page and its product markup using only an enabled capability or
@@ -72,11 +75,12 @@ guessing.
    [Google product structured data](https://developers.google.com/search/docs/appearance/structured-data/product)
    and [Google's generative AI search guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
    as the rubric, not as a promise of visibility.
-7. Score the observed page with `references/page-score.md`. Return the overall
-   score, band, audit coverage, category scores, criterion ratings, and any
-   critical blockers. Keep unknowns unscored, label low-coverage results
-   provisional, and never present the score as a conversion, ranking, or AI
-   citation prediction.
+7. Score the observed page with `references/page-score.md`. Put the overall
+   score, band, audit coverage, provisional or unscorable label, and critical
+   blockers in the agent audit's `## Page score` section. Put the category
+   table, criterion ratings, and evidence notes in the separate score-report
+   file. Keep unknowns unscored, label low-coverage results provisional, and
+   never present the score as a conversion, ranking, or AI citation prediction.
 8. Prioritize up to three changes. Each change needs an evidence-backed issue,
    the proposed copy/data/experiment change, a reason, an observable success
    signal, and an effort or dependency note. Return fewer changes when the
@@ -84,8 +88,9 @@ guessing.
 9. Draft the human report from the finalized agent audit. Do not do a second,
    looser research pass for it. Carry over the decision, strongest evidence,
    fixes, and limits without adding claims.
-10. Write the agent audit first, then the human report. Finish only after both
-    files exist and the human report points to the exact agent-audit path.
+10. Write the agent audit first, then the score report, then the human report.
+    Finish only after all three files exist and the human report points to the
+    exact agent-audit path.
 
 ## Human report
 
@@ -144,9 +149,9 @@ Write to the agent-audit path named by the prompt; use
 
 1. `## Status`: `READY`, `NEEDS_INPUT`, or `INSUFFICIENT_EVIDENCE`.
 2. `## Page score`: overall score and band, audit coverage, provisional or
-   unscorable label when required, critical blockers, and a category table with
-   weight, quality score, coverage, and the main finding. Follow it
-   with criterion ratings and short evidence notes.
+   unscorable label when required, and critical blockers only. Do not include
+   the category table or criterion ratings here; those go in the score-report
+   file. End the section with a pointer to the score-report path.
 3. `## Decision`: one sentence answering whether the page is ready for the
    stated traffic or discovery test, with calibrated confidence.
 4. `## Scope`: product, audience, query, competitor, URL, and access date.
@@ -157,7 +162,7 @@ Write to the agent-audit path named by the prompt; use
 9. `## Unknowns and limits`: inaccessible sources, assumptions, and the
    cheapest next check.
 10. `## Sources`: URL, access date, short excerpt or precise field, role, and
-   independence key for every material external fact.
+    independence key for every material external fact.
 
 Label reasoning as `fact`, `interpretation`, or `hypothesis`. A proposed
 success signal is a measurement plan, never a reported result. Keep claims
@@ -165,13 +170,31 @@ about rankings, conversions, demand, and purchase intent as unknown unless the
 user provides direct measurement data. Keep this file useful as an agent
 handoff, not as the human explanation.
 
+## Score report
+
+Write the full score detail to `product-page-score.md` beside the agent audit
+unless the prompt names a separate path. Include:
+
+1. `## Category scores`: a table with category name, weight, quality score
+   (0 to 100), coverage, and the main finding for each category.
+2. `## Criterion ratings`: every assessed criterion with its weight, rating
+   (0 to 4, U, or NA), earned points, and a short evidence note. Cite one
+   observation for every rating below 2 and every rating of 4. Briefly explain
+   ratings of 2 or 3.
+3. `## Arithmetic`: the sums and formula line that reproduce the overall score
+   and coverage from the criterion ratings.
+
+The score report is the only place the category table and criterion ratings
+appear. The agent audit's `## Page score` section references it by path.
+
 At the end of the Codex response, show the human-readable conclusion first,
-then name both output paths and explain that the agent audit is the structured
-handoff. Do not return only "the audit was written".
+then name all three output paths and explain that the agent audit is the
+structured handoff and the score report holds the full scoring detail. Do not
+return only "the audit was written".
 
 ## Boundary
 
-Both outputs are read-only and public-data-only. The audit produces a decision
+All three outputs are read-only and public-data-only. The audit produces a decision
 and a change proposal. It does not expose
 personal or customer data, invent reviews or certifications, infer missing
 values, edit a page or feed, change an ad or store account, send outreach, or
@@ -180,11 +203,11 @@ wait for a separate, explicit approval before any external action.
 
 ## Completion
 
-The result is complete when both outputs exist at the resolved paths, the
+The result is complete when all three outputs exist at the resolved paths, the
 primary URL and access date are visible, page observations are separated from
 claims and interpretations, every material external fact has a traceable
 source, the score arithmetic and coverage can be recalculated from the
-criterion ratings, missing evidence is explicit, the recommended changes are
-prioritized, and the outputs state what the audit did not establish. The human
-report passes the human-writing check and ends with an exact pointer to the
-agent audit.
+criterion ratings in the score report, missing evidence is explicit, the
+recommended changes are prioritized, and the outputs state what the audit did
+not establish. The human report passes the human-writing check and ends with
+an exact pointer to the agent audit.
