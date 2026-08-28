@@ -8,6 +8,7 @@ REPORT = ROOT / "demo" / "output" / "product-page-report.md"
 
 REQUIRED_AUDIT_HEADINGS = (
     "## Status",
+    "## Page score",
     "## Scope",
     "## Decision",
     "## Page facts",

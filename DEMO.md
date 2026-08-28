@@ -20,7 +20,9 @@ invents proof, uses private data, edits a page, or publishes anything.
 1. Open Codex at the repository root.
 2. Paste [`demo/seed-prompt-product-page.md`](demo/seed-prompt-product-page.md).
 3. Watch for two outputs: `demo/output/product-page-report.md` for a human
-   reader and `demo/output/product-page-audit.md` for a downstream agent.
+   reader and `demo/output/product-page-audit.md` for a downstream agent. The
+   agent audit now includes a page score or an honest `UNSCORABLE` result with
+   its coverage and missing observations.
 4. If the Codex run is slow, open the genuine snapshot fallback at
    [`demo/output/product-page-report.md`](demo/output/product-page-report.md),
    then pass the structured audit to an agent when needed.
@@ -31,8 +33,8 @@ invents proof, uses private data, edits a page, or publishes anything.
 before buying traffic, in language a marketer can read quickly.
 
 **Agent result:** A structured audit with the evidence ledger, source rows,
-coverage gaps, and fixes. It is the handoff for another agent, not the human
-explanation.
+coverage gaps, page score, and fixes. It is the handoff for another agent, not
+the human explanation.
 
 **Evidence:** The output separates page observations, first-party claims, and
 interpretations. Each source row shows URL, access date, excerpt, role,

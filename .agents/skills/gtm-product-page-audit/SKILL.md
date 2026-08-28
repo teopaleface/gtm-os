@@ -1,6 +1,6 @@
 ---
 name: gtm-product-page-audit
-description: "Audit one public e-commerce product page and produce a concise, evidence-backed pre-traffic audit plus a plain-language report for a human reader."
+description: "Audit and score one public e-commerce product page, producing a concise evidence-backed agent audit and a plain-language report for a human reader."
 ---
 
 # Product-page audit
@@ -16,7 +16,10 @@ page. Every run creates two separate outputs:
 The two files are different deliverables. The human report explains the result
 without machine-shaped tables. The agent audit preserves the evidence contract.
 The human report may summarize the audit, but it may not add a claim that is
-absent from it.
+absent from it. When the observations are sufficient, the agent audit also
+includes a page-quality score covering conversion, purchase confidence, SEO,
+GEO, and UX/accessibility/performance. The score describes the page evidence;
+it never predicts sales, rankings, or AI citations.
 
 Resolve one explicit `Target URL:` from the invocation prompt or the input. If
 both are present, they must identify the same page; a mismatch is missing input,
@@ -69,14 +72,18 @@ the requested decision.
    availability, condition, brand, identifiers, shipping, returns, and product
    markup. Use the supplied Google guidance as the rubric. Treat structured data
    as an eligibility aid, never as a ranking or display guarantee.
-6. Return at most three prioritized changes. A change includes the issue,
+6. Score the observed page with the rubric below. Return the overall score or
+   `UNSCORABLE`, audit coverage, category scores, criterion ratings, and any
+   critical blockers. Keep unknown criteria out of quality points, but count
+   them in coverage.
+7. Return at most three prioritized changes. A change includes the issue,
    recommendation, evidence, observable success signal, and effort or
    dependency. If the evidence cannot support three changes, return fewer and
    use `INSUFFICIENT_EVIDENCE`.
-7. Draft the human report from the finalized agent audit. Do not do a second,
+8. Draft the human report from the finalized agent audit. Do not do a second,
    looser research pass for it. Carry over the decision, strongest evidence,
    fixes, and limits without adding claims.
-8. Write the agent audit first, then the human report. Finish only after both
+9. Write the agent audit first, then the human report. Finish only after both
    files exist and the human report points to the exact agent-audit path.
 
 ## Human report
@@ -94,7 +101,8 @@ separate writing skill is installed.
 - Separate what the page says from what you conclude. Mark interpretations and
   hypotheses in ordinary language instead of presenting them as facts.
 - Keep the report concise enough to read in one minute. Include only the
-  strongest facts, up to three fixes, and the important unknowns.
+  strongest facts, the score and what it means when available, up to three
+  fixes, and the important unknowns.
 
 Use this shape, adapting the wording to the evidence:
 
@@ -124,6 +132,36 @@ agent when it needs the evidence ledger, source rows, or implementation context.
 The report still uses this shape for `NEEDS_INPUT`; its bottom line names the
 missing input and its next move says what to provide.
 
+## Page score
+
+Rate each observable criterion from 0 to 4. Use `U` for unobserved and `NA` for
+not applicable. Do not turn `U` into zero. Calculate each category and the
+overall score from assessed weights only:
+
+`100 * sum(weight * rating / 4) / sum(assessed weights)`
+
+Calculate audit coverage as assessed applicable weight divided by total
+applicable weight. If coverage is below 50%, report `UNSCORABLE` and name the
+cheapest observations needed. Mark a numeric score `provisional` below 80%
+coverage. Use these bands: 90-100 Excellent, 75-89 Strong, 60-74 Mixed,
+40-59 Weak, and 0-39 Critical.
+
+Use these category weights and inspect the listed dimensions:
+
+| Category | Weight | Dimensions |
+|---|---:|---|
+| Conversion clarity and persuasion | 30 | offer, product detail, CTA/options, objections, scanability |
+| Purchase confidence and friction | 20 | price/availability, shipping, returns/warranty, proof, seller trust |
+| SEO discovery | 20 | crawl controls, title/description/heading, unique content, markup, images |
+| GEO and AI answer readiness | 15 | factual answerability, entity clarity, provenance, buyer questions, consistency |
+| UX, accessibility, and performance | 15 | mobile path, interactions, accessibility, media, speed/stability |
+
+Explain criterion ratings in the agent audit. Cite an observation for every
+rating below 2 and every rating of 4. Name critical blockers separately. A
+critical blocker keeps the readiness decision negative even when the arithmetic
+score is high. SEO and GEO scores assess eligibility and answerability, not
+ranking, rich results, citations, or sales.
+
 ## Agent audit
 
 Write to the agent-audit path named by the prompt; use
@@ -131,6 +169,7 @@ Write to the agent-audit path named by the prompt; use
 under 60 physical lines and use exactly these headings:
 
 - `## Status`
+- `## Page score`
 - `## Scope`
 - `## Decision`
 - `## Page facts`
@@ -162,9 +201,10 @@ the product will rank or convert.
 
 ## Done
 
-Both outputs exist at the resolved paths. The agent audit contains the nine
-headings, resolved target URL, access date, observations, claim ledger, coverage
-check, prioritized changes, and source rows. The human report gives the same
-decision in plain language, passes the human-writing check, states its limits,
-and ends with an exact pointer to the agent audit. The final response names both
-files and leads with the human conclusion.
+Both outputs exist at the resolved paths. The agent audit contains the ten
+headings, resolved target URL, access date, page score or `UNSCORABLE` result,
+observations, claim ledger, coverage check, prioritized changes, and source rows.
+The human report gives the same decision and score meaning in plain language,
+passes the human-writing check, states its limits, and ends with an exact
+pointer to the agent audit. The final response names both files and leads with
+the human conclusion.

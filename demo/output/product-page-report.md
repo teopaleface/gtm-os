@@ -2,16 +2,18 @@
 
 ## Bottom line
 
-I would not send paid traffic to the selected variant yet. The snapshot has
-useful product information, but it also shows `Sale Out of Stock`, so the stock
-state is unresolved. This is a snapshot, not a live check.
+I would not send paid traffic to the selected variant yet. The snapshot is
+`UNSCORABLE` at 47% coverage, and it shows `Sale Out of Stock`, so the stock
+state is unresolved. That is a limit of the evidence, not a quality score. This
+is a snapshot, not a live check.
 
 ## What I found
 
 The Hazard variant is listed at €149.99, down from €229.99. The page gives
 specific battery figures, Bluetooth 5.2, 332 g weight, multipoint pairing, and
 an app. It also claims adjustable bass and four-microphone noise canceling.
-Those performance claims come from the seller, not an independent test.
+Those performance claims come from the seller, not an independent test. The
+partial score is strongest on product detail and weakest on purchase confidence.
 
 ## What needs attention
 
@@ -25,8 +27,9 @@ Those performance claims come from the seller, not an independent test.
 ## What I couldn't verify
 
 The snapshot does not settle live stock, checkout shipping cost, Product
-JSON-LD, or independent performance evidence. It also says nothing about
-ranking, demand, or conversion.
+JSON-LD, SEO discovery controls, mobile usability, accessibility, performance,
+or independent performance evidence. It also says nothing about ranking,
+demand, or conversion.
 
 ## Next move
 
