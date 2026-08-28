@@ -25,6 +25,7 @@ The catalog is broad on purpose, but each run should choose the smallest playboo
 | `gtm-content` | create evidence-led content angles |
 | `gtm-seo` | find high-fit search work |
 | `gtm-ai-visibility` | audit buyer-facing AI answers |
+| `gtm-product-page-audit` | audit one public e-commerce product page before traffic |
 | `gtm-demand-miner` | find visible buyer demand |
 | `gtm-channel-plan` | choose the next acquisition channel test |
 | `gtm-paid-growth` | design a controlled paid test |

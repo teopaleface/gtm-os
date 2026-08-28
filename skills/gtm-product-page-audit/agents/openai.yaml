@@ -1,0 +1,5 @@
+interface:
+  display_name: "Product page audit"
+  short_description: "Audit product pages before traffic"
+policy:
+  allow_implicit_invocation: false

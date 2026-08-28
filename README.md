@@ -15,10 +15,14 @@ GTM OS should ask for the missing context, label what is known and unknown, crea
 ## Invocation model
 
 - `gtm-orchestrator` is the model-invoked entry point. Use a normal GTM request and let it route the work.
-- The specialist playbooks are explicit-only. Run one when you already know the job, for example `/gtm-proofgap` or `/gtm-positioning`.
+- The specialist playbooks are explicit-only. Run one when you already know the job, for example `/gtm-proofgap`, `/gtm-positioning`, or `/gtm-product-page-audit`.
 - `gtm-evals` is explicit-only and checks saved outputs. It does not pretend that a fixture test proves the quality of live research.
 
-The package includes 39 explicit playbooks across strategy, audience, positioning, research, competition, proof gaps, demand, channels, launches, pricing, sales enablement, onboarding, activation, PLG, retention, churn, experiments, and analytics. See `references/playbook-catalog.md` for the map.
+The package includes 41 explicit playbooks across strategy, audience, positioning, research, competition, proof gaps, demand, channels, launches, pricing, sales enablement, onboarding, activation, PLG, retention, churn, experiments, analytics, and product-page audits, plus the optional `gtm-apify` capability. See `references/playbook-catalog.md` for the map.
+
+## Focused e-commerce slice
+
+`gtm-product-page-audit` is the focused e-commerce workflow: one public product page, optional comparison context, a claim ledger, product-data coverage, and up to three pre-traffic changes. It does not replace the broader GTM workflow; it is a small, explicit playbook that can stand alone in a timed demo.
 
 ## How the flow works
 
@@ -31,6 +35,34 @@ The plugin stays read-only by default. It can draft outreach or campaign work, b
 Every external fact needs a URL, access date, and short excerpt. We distinguish facts from interpretations and hypotheses. A few public reviews do not represent every customer. A job post is a signal, not proof of budget. When the evidence bar is not met, the output says `INSUFFICIENT_EVIDENCE`.
 
 The plugin can use the web, connected apps, or an MCP data source when those tools are available in the user's workspace. The skills package itself contains no secret and makes no API promise on its own.
+
+## Optional live capabilities
+
+Production skills read [`references/user-capabilities.md`](references/user-capabilities.md)
+before choosing Browser, Computer Use, or Apify. All three capabilities are
+disabled by default. Apify additionally requires
+`APIFY_ENABLED=true` and `APIFY_TOKEN` in the local environment.
+The token is never stored in the repository. If a capability is missing, the
+skills use a snapshot or another permitted source and keep the evidence
+limitation visible.
+
+The Skillathon entry remains snapshot-first and does not depend on these
+capabilities.
+
+## Optional live enrichment
+
+Production skills can use the optional `gtm-apify` capability for bounded,
+read-only public-web observations. It is disabled by default. Copy
+`.env.example` to `.env`, set `apify: enabled` in the capability file,
+set `APIFY_ENABLED=true`, and provide a local
+`APIFY_TOKEN`; the token is read only at runtime and is never part of the
+plugin, prompts, fixtures, or commits. Without that configuration, skills use
+their normal web, browser, connector, or snapshot path.
+
+The capability is intentionally limited to an allow-listed Actor, one URL or
+query at a time, a small result limit, and a charge cap. It enriches evidence;
+it does not publish changes or replace the shared evidence policy. The
+Skillathon entry skill stays offline and does not require Apify.
 
 ## Repository layout
 

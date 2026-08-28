@@ -2,6 +2,12 @@
 
 GTM OS is packaged as a skills-only plugin. It has no MCP server and no app connector of its own. The plugin can use tools available in the user's Codex or ChatGPT session, but its repository contains no credentials.
 
+The production package also includes an optional `gtm-apify` capability. It is
+disabled unless `APIFY_ENABLED=true` and a local `APIFY_TOKEN` are configured;
+the capability uses a bounded, read-only REST adapter and degrades to the
+normal web/browser/snapshot path when unavailable. No Apify credential is
+included in the plugin or the Skillathon package.
+
 ## Public links
 
 - Website: https://gtm-os.ishi-8634.chatgpt.site
@@ -16,6 +22,7 @@ GTM OS is packaged as a skills-only plugin. It has no MCP server and no app conn
 2. `Compare these competitors for one buyer decision and show which claims have independent proof.`
 3. `Turn this launch idea into tickets with blockers, owners, evidence needs, and a measurement plan.`
 4. `Audit this GTM output. Check the evidence, labels, scores, and next action.`
+5. `Audit this public product page before I spend money sending it qualified traffic.`
 
 ## Included test cases
 
@@ -26,12 +33,17 @@ Positive cases cover a valid contract, deliberate evidence abstention, ticket bl
 ## Preflight
 
 The detailed run log is [`docs/qa-report.md`](qa-report.md). It records the
-manifest validator, all 40 skill validators and smoke tests, the deterministic
-evals, the public-link checks, and the fresh-clone Skillathon run.
+manifest validator, all bundled skill validators and smoke tests, the
+deterministic evals, the public-link checks, and the fresh-clone Skillathon
+run.
 
 The repository also contains the optional Skillathon package under
 `.agents/skills/`, `demo/`, `DEMO.md`, and `submission.json`. The OpenAI plugin
 manifest continues to load the production plugin skills from `skills/`.
+
+The e-commerce slice is explicit-only and read-only. It audits one public
+product page for buyer clarity, merchant-data coverage, and evidence-backed
+pre-traffic fixes; it does not promise search ranking or publish changes.
 
 ## Submission state
 

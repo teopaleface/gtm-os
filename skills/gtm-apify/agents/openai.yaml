@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apify public-web capability"
+  short_description: "Collect bounded public-web observations with Apify"
+

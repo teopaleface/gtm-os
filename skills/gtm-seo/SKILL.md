@@ -10,7 +10,10 @@ Start from buyer intent and a credible answer. Search volume without fit is a we
 ## Steps
 
 1. Define the audience, problem, geography, stage, and desired action.
-2. Collect query language, result patterns, competitors, and source types using the available search tools.
+2. Collect query language, result patterns, competitors, and source types using
+   the available search tools. If the optional `gtm-apify` capability is
+   enabled, use it for a bounded public search sample and preserve its date and
+   locale.
 3. Group queries by intent and evaluate fit, evidence, competition, and time to useful content.
 4. Recommend a small topic cluster with a point of view and a proof plan.
 5. Define one page to create or improve and one signal to review.

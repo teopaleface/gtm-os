@@ -10,7 +10,10 @@ Measure a narrow set of real buyer questions. Treat an AI answer as a sampled ou
 ## Steps
 
 1. Define the audience, category, competitors, geography, and five to ten buying questions.
-2. Run the questions through the available AI or search tools. Record the exact prompt, date, answer, citations, and model or source.
+2. Run the questions through the available AI or search tools. If the optional
+   `gtm-apify` capability is enabled, use it only for a bounded, dated search
+   observation. Record the exact prompt, date, answer, citations, and model or
+   source.
 3. Check brand presence, category framing, competitor mentions, source coverage, and factual accuracy.
 4. Separate what the system said from what the public sources support. Flag stale or missing citations.
 5. Recommend one content or source improvement and one repeat measurement.

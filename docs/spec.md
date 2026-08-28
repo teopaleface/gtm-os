@@ -33,6 +33,7 @@ Every specialist playbook is explicit-only. The orchestrator routes by writing t
 | Audience | Who has the problem and why? | `gtm-icp`, `gtm-segmentation` |
 | Message | Why should this audience care? | `gtm-positioning`, `gtm-messaging`, `gtm-proofgap` |
 | Market | What is changing around the buyer? | `gtm-competitive-intel`, `gtm-why-now`, `gtm-ai-visibility` |
+| Product discovery | Is one product page understandable and defensible before traffic? | `gtm-product-page-audit` |
 | Demand | Where can we reach qualified buyers? | `gtm-demand-miner`, `gtm-channel-plan`, `gtm-outbound` |
 | Revenue | How does interest become a deal? | `gtm-pricing`, `gtm-sales-enablement`, `gtm-launch-plan` |
 | Product-led growth | How does a new user reach value? | `gtm-onboarding`, `gtm-activation` |

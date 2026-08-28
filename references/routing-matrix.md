@@ -14,6 +14,7 @@ Use the smallest playbook that can answer the decision. A ticket may reference o
 | Is there a reason to act now? | `gtm-why-now` | `gtm-demand-miner` |
 | Where are qualified buyers visible? | `gtm-demand-miner` | `gtm-channel-plan` |
 | Will buyers find us in AI answers? | `gtm-ai-visibility` | `gtm-messaging` |
+| Is this product page ready before traffic? | `gtm-product-page-audit` | `gtm-ai-visibility`, `gtm-seo` |
 | How should we reach a market? | `gtm-channel-plan` | `gtm-content`, `gtm-outbound` |
 | Which search topics should we own? | `gtm-seo` | `gtm-content`, `gtm-demand-miner` |
 | Which paid test is worth running? | `gtm-paid-growth` | `gtm-channel-plan`, `gtm-experiment` |

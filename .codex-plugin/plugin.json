@@ -1,22 +1,22 @@
 {
   "name": "gtm-os",
   "version": "0.1.0",
-  "description": "Evidence-backed go-to-market workflows from product context to prioritized action.",
+  "description": "Evidence-backed go-to-market workflows, including focused e-commerce product-page audits.",
   "author": {
     "name": "GTM OS contributors"
   },
   "homepage": "https://gtm-os.ishi-8634.chatgpt.site",
   "repository": "https://github.com/teopaleface/gtm-os",
   "license": "MIT",
-  "keywords": ["gtm", "go-to-market", "market-research", "growth", "sales"],
+  "keywords": ["gtm", "go-to-market", "market-research", "growth", "sales", "e-commerce"],
   "skills": "./skills/",
   "interface": {
     "displayName": "GTM OS",
     "shortDescription": "Turn GTM questions into evidence-backed work.",
-    "longDescription": "GTM OS routes go-to-market questions from intake through research, decisions, action tickets, and evaluation.",
+    "longDescription": "GTM OS routes go-to-market questions from intake through research, decisions, action tickets, and evaluation, with an explicit e-commerce product-page audit.",
     "developerName": "GTM OS contributors",
     "category": "Productivity",
-    "capabilities": ["go-to-market strategy", "market research", "sales and growth planning"],
+    "capabilities": ["go-to-market strategy", "market research", "sales and growth planning", "e-commerce product-page audits", "optional Apify public-web enrichment"],
     "defaultPrompt": "Help me turn this go-to-market problem into a clear, evidence-backed plan.",
     "websiteURL": "https://gtm-os.ishi-8634.chatgpt.site",
     "privacyPolicyURL": "https://gtm-os.ishi-8634.chatgpt.site/privacy",

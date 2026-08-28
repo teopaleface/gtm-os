@@ -4,18 +4,18 @@
     "name": "GTM OS",
     "members": ["Teo"]
   },
-  "track": "custom",
-  "problem": "A product marketer at a Romanian invoicing SaaS needs to distinguish a competitor's e-Factura automation promise from independent customer friction before writing a battlecard.",
-  "entry_skill": ".agents/skills/gtm-skillathon-proofgap/SKILL.md",
+  "track": "ai-search-optimization",
+  "problem": "An e-commerce product marketer needs to know whether a product page is understandable and defensible before spending money on qualified traffic.",
+  "entry_skill": ".agents/skills/gtm-product-page-audit/SKILL.md",
   "skills": [
     {
-      "path": ".agents/skills/gtm-skillathon-proofgap/SKILL.md",
-      "role": "Turn one competitor promise and public evidence into a cautious proof-gap validation brief."
+      "path": ".agents/skills/gtm-product-page-audit/SKILL.md",
+      "role": "Turn one public product page into a concise evidence-backed pre-traffic audit."
     }
   ],
-  "seed_prompt": "demo/seed-prompt.md",
-  "input": "demo/input/proof-gap-input.md",
-  "output": "demo/output/proof-gap-brief.md",
+  "seed_prompt": "demo/seed-prompt-product-page.md",
+  "input": "demo/input/product-page-audit.md",
+  "output": "demo/output/product-page-audit.md",
   "evals": "demo/evals.md",
   "run_sheet": "DEMO.md"
 }

@@ -1,54 +1,56 @@
-# Run sheet
+# Product-page audit run sheet
 
 ## Say this — 20 seconds
 
 **Team:** GTM OS
 
-**Track:** `custom`
+**Track:** `ai-search-optimization`
 
-**Who has the problem:** A product marketer at a Romanian invoicing SaaS who
-needs a defensible competitor battlecard.
+**Who has the problem:** An e-commerce product marketer deciding whether a
+product page is ready for qualified traffic.
 
-**The job this skill does:** It compares one competitor promise with independent
-public evidence and turns the result into a cautious validation lead.
+**The job this skill does:** It audits one public product page for buyer clarity,
+merchant-data coverage, and evidence-backed pre-traffic fixes.
 
-**Boundary — what it never does:** It never accuses a competitor, generalizes
-from a few reviews, exposes personal data, or takes an external action.
+**Boundary — what it never does:** It never promises rankings or conversions,
+invents proof, uses private data, edits a page, or publishes anything.
 
 ## Run this — 60 seconds
 
 1. Open Codex at the repository root.
-2. Paste [`demo/seed-prompt.md`](demo/seed-prompt.md).
-3. Watch for `demo/output/proof-gap-brief.md` and its visible status, evidence
-   table, sales question, and next validation action.
-4. If the live run is slow, open the genuine fallback at
-   [`demo/output/proof-gap-brief.md`](demo/output/proof-gap-brief.md).
+2. Paste [`demo/seed-prompt-product-page.md`](demo/seed-prompt-product-page.md).
+3. Watch for `demo/output/product-page-audit.md` and its status, claim ledger,
+   product-data coverage, and three prioritized changes.
+4. If the Codex run is slow, open the genuine snapshot fallback at
+   [`demo/output/product-page-audit.md`](demo/output/product-page-audit.md).
 
 ## Show this — 25 seconds
 
-**Result:** A short SmartBill e-Factura proof-gap brief that a marketer can use
-to decide what to validate before writing a battlecard.
+**Result:** A short Patagonia Black Hole 32L product-page audit that a marketer
+can use to decide what to fix before buying traffic.
 
-**Evidence:** Each source row shows source type, URL, access date, excerpt,
-independence key, and limitation. The output separates the official promise
-from customer evidence and interpretation.
+**Evidence:** The output separates page observations, first-party claims, and
+interpretations. Each source row shows URL, access date, excerpt, role,
+independence key, and limitation.
 
-**Fallback output was produced:** 2026-08-28 during QA by running the entry
-skill in a fresh Codex session against the committed public input; it is labeled
-as a fallback and is not described as live.
+**Fallback output:** The committed snapshot is labelled as a fallback and is
+not described as a live page check.
 
 ## Evals — 10 seconds
 
 | Case | Result | Where |
 | --- | --- | --- |
-| Intended | Mixed signal with sourced promise, independent evidence, caveat, and next check | [`demo/evals.md`](demo/evals.md) |
-| Insufficient evidence | Names missing evidence and does not guess | [`demo/evals.md`](demo/evals.md) |
-| Failure / exclusion | Stops when asked to accuse or use private data | [`demo/evals.md`](demo/evals.md) |
+| Intended | Flags insufficient evidence, with claim ledger, coverage gaps, and three validation changes | [`demo/evals.md`](demo/evals.md) |
+| Insufficient evidence | Names missing page evidence and does not guess | [`demo/evals.md`](demo/evals.md) |
+| Failure / exclusion | Refuses ranking guarantees, private data, and publication | [`demo/evals.md`](demo/evals.md) |
 
 ## Close — 5 seconds
 
-**Reusable on:** Any one-competitor, one-promise GTM question with public first-
-party and independent evidence URLs.
+**Reusable on:** Any public product page where a founder or marketer needs a
+pre-traffic clarity and evidence check.
 
-**Material limitation:** Public reviews are directional and may be biased;
-they do not establish market prevalence or prove a product gap.
+**Material limitation:** A page audit does not establish rankings, demand,
+conversion, purchase intent, or market prevalence.
+
+The previous proof-gap demo remains in `demo/input/proof-gap-input.md` and
+`demo/output/proof-gap-brief.md` as a regression example for the broader GTM OS.
