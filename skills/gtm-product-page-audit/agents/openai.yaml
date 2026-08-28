@@ -1,5 +1,5 @@
 interface:
   display_name: "Product page audit"
-  short_description: "Audit product pages before traffic"
+  short_description: "Score product-page conversion readiness"
 policy:
   allow_implicit_invocation: false

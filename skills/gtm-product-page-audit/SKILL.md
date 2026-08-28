@@ -1,6 +1,6 @@
 ---
 name: gtm-product-page-audit
-description: "Audit one public e-commerce product page for buyer clarity, merchant-data completeness, and evidence-backed pre-traffic fixes."
+description: "Score and audit one public e-commerce product page for conversion readiness, SEO, generative-search readiness (GEO), usability, and evidence-backed pre-traffic fixes."
 ---
 
 # Product page audit
@@ -12,7 +12,7 @@ Read `../../references/evidence-policy.md` and
 `../../references/artifact-contract.md` before producing the result. Read
 `../../references/user-capabilities.md` before choosing a live source. Use a
 supplied snapshot when a page is inaccessible or a timed run needs a
-deterministic fallback.
+deterministic fallback. Read `references/page-score.md` before scoring.
 
 ## Capability gates
 
@@ -42,10 +42,13 @@ If the user supplies no public product URL or usable snapshot, return
 1. Lock the product, audience, geography, query, and decision. Keep one page as
    the primary object and record the page URL and access date.
 2. Observe the page and its product markup using only an enabled capability or
-   the supplied snapshot. Record the visible product name,
-   price and currency, availability, variants, brand, identifiers, images,
-   shipping, returns, reviews or ratings, and relevant Product JSON-LD. Mark
-   each item as visible, markup-only, first-party claim, or unavailable.
+   the supplied snapshot. Record the visible product name, price and currency,
+   availability, variants, brand, identifiers, images, shipping, returns,
+   reviews or ratings, and relevant Product JSON-LD. When observable, also
+   inspect the title, description, main heading, canonical, robots controls,
+   internal discovery, mobile purchase path, accessibility basics, and dated
+   performance evidence. Mark each item as visible, markup-only, first-party
+   claim, measured, or unavailable.
 3. Build a claim ledger for material promises. For every claim, capture the
    exact page excerpt, source URL, source role, and status: `verified`,
    `unsupported`, `contradicted`, or `unknown`. A first-party page proves that
@@ -54,13 +57,18 @@ If the user supplies no public product URL or usable snapshot, return
    decision. Treat search or AI answers as dated observations, not rankings or
    market facts. Use independent sources for material external claims and stop
    at `INSUFFICIENT_EVIDENCE` when the evidence bar is not met.
-5. Check product-information coverage against Google’s official product and
+5. Check product-information coverage against Google's official product and
    merchant-listing guidance. Structured data can improve eligibility for
    search enhancements, but it is not a guarantee of display or ranking. Use
    [Google product structured data](https://developers.google.com/search/docs/appearance/structured-data/product)
-   and [Google’s generative AI search guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
+   and [Google's generative AI search guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
    as the rubric, not as a promise of visibility.
-6. Prioritize up to three changes. Each change needs an evidence-backed issue,
+6. Score the observed page with `references/page-score.md`. Return the overall
+   score, band, audit coverage, category scores, criterion ratings, and any
+   critical blockers. Keep unknowns unscored, label low-coverage results
+   provisional, and never present the score as a conversion, ranking, or AI
+   citation prediction.
+7. Prioritize up to three changes. Each change needs an evidence-backed issue,
    the proposed copy/data/experiment change, a reason, an observable success
    signal, and an effort or dependency note. Return fewer changes when the
    evidence cannot support three; say why.
@@ -69,17 +77,21 @@ If the user supplies no public product URL or usable snapshot, return
 
 Use this order:
 
-1. `## Status` — `READY`, `NEEDS_INPUT`, or `INSUFFICIENT_EVIDENCE`.
-2. `## Decision` — one sentence answering whether the page is ready for the
+1. `## Status`: `READY`, `NEEDS_INPUT`, or `INSUFFICIENT_EVIDENCE`.
+2. `## Page score`: overall score and band, audit coverage, provisional or
+   unscorable label when required, critical blockers, and a category table with
+   weight, quality score, coverage, and the main finding. Follow it
+   with criterion ratings and short evidence notes.
+3. `## Decision`: one sentence answering whether the page is ready for the
    stated traffic or discovery test, with calibrated confidence.
-3. `## Scope` — product, audience, query, competitor, URL, and access date.
-4. `## Page facts` — observed facts and first-party claims kept distinct.
-5. `## Claim ledger` — claim, excerpt, source, status, and caveat.
-6. `## Product-data coverage` — present, missing, or uncheckable fields.
-7. `## Prioritized changes` — no more than three actionable changes.
-8. `## Unknowns and limits` — inaccessible sources, assumptions, and the
+4. `## Scope`: product, audience, query, competitor, URL, and access date.
+5. `## Page facts`: observed facts and first-party claims kept distinct.
+6. `## Claim ledger`: claim, excerpt, source, status, and caveat.
+7. `## Product-data coverage`: present, missing, or uncheckable fields.
+8. `## Prioritized changes`: no more than three actionable changes.
+9. `## Unknowns and limits`: inaccessible sources, assumptions, and the
    cheapest next check.
-9. `## Sources` — URL, access date, short excerpt or precise field, role, and
+10. `## Sources`: URL, access date, short excerpt or precise field, role, and
    independence key for every material external fact.
 
 Label reasoning as `fact`, `interpretation`, or `hypothesis`. A proposed
@@ -99,6 +111,7 @@ wait for a separate, explicit approval before any external action.
 
 The result is complete when the primary URL and access date are visible, page
 observations are separated from claims and interpretations, every material
-external fact has a traceable source, missing evidence is explicit, the
+external fact has a traceable source, the score arithmetic and coverage can be
+recalculated from the criterion ratings, missing evidence is explicit, the
 recommended changes are prioritized, and the output states what the audit did
 not establish.
