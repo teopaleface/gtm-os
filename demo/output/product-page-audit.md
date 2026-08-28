@@ -1,55 +1,51 @@
-# Product-page audit
-
 ## Status
-COMPLETE. Live URL mode, exact target fetched once. Coverage 88%, no critical blockers.
+COMPLETE. [fact] The exact target URL loaded in live browser inspection on 2026-08-28; the audit stayed read-only and page-bounded.
 
 ## Page score
-Overall: 87/100 (Strong). Coverage 88%. No critical blockers.
-SEO category is provisional (crawl controls and structured-data markup unobserved).
-Full category scores, criterion ratings, and evidence notes are in `demo/output/product-page-score.md`.
+[fact] Overall: 74/100; band: Mixed; audit coverage: 96% (96/100 applicable weight); numeric and not provisional. Full scoring detail: `/Users/teo/GTM/gtm-os/demo/output/product-page-score.md`.
+[interpretation] Critical blockers: a load-time cart-related JavaScript error; no visible review rating/count; no visible delivery cost/ETA or stock state in the purchase area.
 
 ## Scope
-Target URL: https://www.thomann.ro/beyerdynamic_dt_900_pro_x.htm
-Access date: 2026-08-28
+[fact] Target URL: `https://www.hoka.com/en/ro/men-road/clifton-11/1176572.html?_gl=1*knklp7*_up*MQ..*_ga*MTIzNDA3MjM3LjE3ODc5MzYyNzE.*_ga_FZH5FXREG7*czE3ODc5MzYyNzEkbzEkZzAkdDE3ODc5MzYyNzEkajYwJGwwJGgxMDAwODI0MDcz`
+[fact] Access date: 2026-08-28, Europe/Bucharest. Live URL mode; only this URL was inspected; no links were followed. No competitor, shopper query, or Google guidance snapshot was supplied.
+[fact] Evidence includes the default desktop render and a temporary 390x844 mobile render; the viewport was restored after the check.
 
 ## Decision
-READY (strong). Page is fit to drive paid and natural traffic. Fix the shipping-cost gap and confirm structured data before scaling.
+[interpretation] DO NOT SCALE YET. Keep the page in QA until the cart error, localized commerce clarity, and proof/fit gaps are resolved.
+[hypothesis] The runtime error may affect cart behavior, but impact was not tested because no basket action was submitted.
 
 ## Page facts
-- Product: beyerdynamic DT 900 PRO X, open-back dynamic studio headphones, STELLAR.45 driver (fact).
-- Price: 1.199 lei, VAT included (fact).
-- Availability: in stock, ships immediately (fact).
-- Article number: 527377; available since October 2021; sell unit 1 piece (fact).
-- Specs: 48 Ohm, 5-40000 Hz, 100 dB SPL @1mW/500Hz, 345g, velour pads, interchangeable pads and cable (fact).
-- Includes: 3m and 1.8m cables (mini XLR to 3.5mm with 6.35mm adapter) and carrying bag (fact).
-- Trust: 30-day money-back, 3-year Thomann warranty (fact).
-- Reviews: 4.6/5 from 259 ratings; 177 written reviews; only verified buyers may rate (fact).
-- Shipping: free from 1.500 lei; product price 1.199 lei is below threshold (fact).
-- Payment: COD, bank transfer, credit card (fact).
-- Manufacturer: beyerdynamic GmbH & Co. KG, Theresienstraße 8, 74072 Heilbronn, Germany (fact).
-- Sales rank: 12 in Studio Headphones (fact).
-- Images: 14 product photos, 360-degree view, alt text present (fact).
+[fact] The page identifies HOKA Men's Clifton 11 for Road Running, priced at RON 875, with 11 colour options, 14 sizes, and Regular width.
+[fact] The visible product copy covers daily running/walking, engineered mesh, MetaRocker, outsole durability, heel lockdown, weight 283g, 8mm drop, and 42mm heel stack.
+[fact] The page shows Add to Basket, Try-On, View in 3D, Size & Fit, delivery/returns, 2-Year Warranty, and 30-Day Guarantee messaging.
+[fact] Product JSON-LD contains brand HOKA, identifier/MPN/SKU/productID 1176572, five images, price 875.0 RON, and availability InStock.
+[fact] Product Reviews is present as a collapsed section with no visible rating or review count in the initial render.
+[fact] A browser console error occurred during load: `TypeError: d.emptyCartLinkClickEvent is not a function`.
 
 ## Claim ledger
-- "în stoc și poate fi expediat imediat" — thomann.ro page — seller, first-party — verified (stock badge plus shipping link).
-- "4.6 din 5 stele din 259 evaluări" — thomann.ro page — seller, first-party — verified (rating breakdown shown: 189 five-star, 53 four-star, 14 three-star, 2 two-star, 1 one-star).
-- "transport gratuit de la 1.500 lei" — thomann.ro header — seller, first-party — verified; does not state cost below threshold (unsupported for sub-threshold orders).
-- "3 Ani Garanţie Thomann" and "30 Garantarea rambursării banilor" — thomann.ro page — seller, first-party — verified (links to helpdesk pages).
-- "STELLAR.45 driver" and spec values — thomann.ro page — seller, first-party — verified as listed; performance not independently tested (unknown).
+- [verified] Excerpt: `Clifton 11`, `RON 875`, `Road Running`; source URL: S1; source role: first-party product page; independence key: first-party-target; limitation: seller content is not independent proof.
+- [verified] Excerpt: `Light and plush for everyday miles.` plus the feature/spec sections; source URL: S1; source role: first-party product copy; independence key: first-party-target; limitation: benefits are seller claims.
+- [verified] Field: JSON-LD `availability: InStock`, `price: 875.0`, `priceCurrency: RON`; source URL: S2; source role: page structured data; independence key: first-party-target; limitation: markup is not a display or availability guarantee.
+- [verified] Excerpt: `Easy, hassle-free 30-day returns on all orders.` and `2-Year Warranty`; source URL: S1; source role: first-party service messaging; independence key: first-party-target; limitation: conditions and eligibility were not verified.
+- [unknown] Fields: visible/schema price is `875 RON`, while the embedded Yotpo widget has `data-yotpo-price="160.00"` and `data-yotpo-currency="EUR"`; source URL: S5; source role: page DOM; independence key: first-party-target; limitation: this may be a base-currency implementation and needs validation.
+- [unknown] Claim: review proof is sufficient; source URL: S1; source role: first-party product page; independence key: first-party-target; limitation: only the `Product Reviews` label was visible, with no rating/count.
 
 ## Product-data coverage
-Title: present. Description: present (spec list). Image: present (14 photos, 360 view, alt text). Link: present. Price: present (1.199 lei). Availability: present (in stock). Condition: new (implied, not explicit). Brand: present (beyerdynamic). Identifiers: article 527377; GTIN and MPN unknown. Shipping: partial (free threshold only). Returns: present (30-day). Product markup: unknown (JSON-LD not visible in markdown snapshot). Gaps: condition, GTIN/MPN, exact shipping cost, structured data.
+[fact] Coverage: title yes; description yes; image yes; link/canonical yes; price yes; availability partial (JSON-LD only); condition unknown; brand yes; identifiers yes; shipping partial (general on-page promise, no structured delivery detail); returns partial (30-day messaging, no structured policy); Product markup yes. No Google guidance snapshot was supplied.
 
 ## Prioritized changes
-1. Show shipping cost and ETA for this item below the free-shipping threshold (1199 is below 1500 lei). Issue: buyer cannot compute landed cost. Recommendation: render zone-based cost and ETA beside the price. Evidence: only "free from 1.500 lei" shown. Success signal: shipping cost visible without clicking through. Effort: low (templating).
-2. Add or verify Product JSON-LD with price, availability, brand, MPN/GTIN, and review aggregate. Issue: structured data unobserved; eligibility for rich results unknown. Recommendation: emit schema.org Product, Offer, and AggregateRating. Evidence: no markup visible in snapshot. Success signal: Rich Results Test passes with no errors. Effort: medium.
-3. Surface condition as "new" and show MPN/GTIN in the data sheet. Issue: condition implied, only internal article number shown. Recommendation: add condition field and manufacturer part number. Evidence: spec block lacks MPN and GTIN. Success signal: MPN visible and validated in Merchant Center. Effort: low.
+1. [issue] Cart runtime error. [recommendation] Guard or remove the failing `emptyCartLinkClickEvent` call and run fresh-session add-to-basket/cart QA. [evidence] S3. [success] No page-load console error and a selected-size add-to-basket flow reaches the basket. [effort/dependency] Medium; frontend/cart owner.
+2. [issue] Localized purchase certainty is incomplete. [recommendation] Show per-variant stock, delivery window/cost, and total-cost/VAT treatment beside the CTA on desktop and mobile. [evidence] S1/S2. [success] A shopper can answer “Can I buy this size and when/how much will it arrive?” without leaving the PDP. [effort/dependency] Medium; fulfillment/Global-e data.
+3. [issue] Proof and fit guidance are hidden or absent. [recommendation] Surface rating/review count and concise size-fit guidance near the selectors, retaining the detailed sections below. [evidence] S1/S4. [success] Review proof and sizing help are visible before the purchase decision. [effort/dependency] Medium; Yotpo/content and fit guidance.
 
 ## Unknowns and limits
-- Crawl controls (robots/noindex) not checked. Product JSON-LD not visible in page source.
-- Page speed and Core Web Vitals not measured; mobile path inferred from structure, not tested.
-- Independent reviews or third-party test data not gathered; spec performance not verified.
+[fact] Checkout, add-to-basket submission, variant-level stock, delivery price/ETA, return conditions, warranty terms, and review contents were not tested or independently verified.
+[fact] Full WCAG testing, real-device performance, Core Web Vitals, and a controlled visual-stability trace were not available; performance/visual stability is `U` in the score.
+[interpretation] The score assesses page evidence and eligibility/answerability only; it does not predict sales, rankings, rich results, AI citations, or conversion.
 
 ## Sources
-- https://www.thomann.ro/beyerdynamic_dt_900_pro_x.htm — 2026-08-28 — full page markdown (title, price 1.199 lei, in stock, specs, reviews 4.6/5 n=259, 30-day and 3-year terms, free-shipping threshold, manufacturer address, sales rank 12) — primary seller page — first-party — limitation: seller self-reported claims, no independent testing.
-- https://www.thomann.ro/helpdesk_shipping.html — linked, not fetched — shipping policy — first-party — limitation: not read.
+- [S1] URL: `https://www.hoka.com/en/ro/men-road/clifton-11/1176572.html?_gl=1*knklp7*_up*MQ..*_ga*MTIzNDA3MjM3LjE3ODc5MzYyNzE.*_ga_FZH5FXREG7*czE3ODc5MzYyNzEkbzEkZzAkdDE3ODc5MzYyNzEkajYwJGwwJGgxMDAwODI0MDcz`; access date: 2026-08-28; exact excerpt/field: rendered product page text and controls listed above; source role: target product page; independence key: first-party-target; limitation: seller-controlled content.
+- [S2] URL: `https://www.hoka.com/en/ro/men-road/clifton-11/1176572.html?_gl=1*knklp7*_up*MQ..*_ga*MTIzNDA3MjM3LjE3ODc5MzYyNzE.*_ga_FZH5FXREG7*czE3ODc5MzYyNzEkbzEkZzAkdDE3ODc5MzYyNzEkajYwJGwwJGgxMDAwODI0MDcz`; access date: 2026-08-28; exact field: Product JSON-LD with name, brand, identifiers, image array, offer price/currency, and InStock; source role: page structured data; independence key: first-party-target; limitation: structured data is not independent verification.
+- [S3] URL: `https://www.hoka.com/en/ro/men-road/clifton-11/1176572.html?_gl=1*knklp7*_up*MQ..*_ga*MTIzNDA3MjM3LjE3ODc5MzYyNzE.*_ga_FZH5FXREG7*czE3ODc5MzYyNzEkbzEkZzAkdDE3ODc5MzYyNzEkajYwJGwwJGgxMDAwODI0MDcz`; access date: 2026-08-28; exact excerpt/field: browser console `TypeError: d.emptyCartLinkClickEvent is not a function` during load; source role: browser runtime observation; independence key: first-party-runtime; limitation: functional impact was not established.
+- [S4] URL: `https://www.hoka.com/en/ro/men-road/clifton-11/1176572.html?_gl=1*knklp7*_up*MQ..*_ga*MTIzNDA3MjM3LjE3ODc5MzYyNzE.*_ga_FZH5FXREG7*czE3ODc5MzYyNzEkbzEkZzAkdDE3ODc5MzYyNzEkajYwJGwwJGgxMDAwODI0MDcz`; access date: 2026-08-28; precise field: default desktop and 390x844 mobile renders, including responsive navigation and nine-slide product gallery; source role: visual/UX observation; independence key: first-party-target; limitation: single browser session and viewport checks.
+- [S5] URL: `https://www.hoka.com/en/ro/men-road/clifton-11/1176572.html?_gl=1*knklp7*_up*MQ..*_ga*MTIzNDA3MjM3LjE3ODc5MzYyNzE.*_ga_FZH5FXREG7*czE3ODc5MzYyNzEkbzEkZzAkdDE3ODc5MzYyNzEkajYwJGwwJGgxMDAwODI0MDcz`; access date: 2026-08-28; precise fields: 118 image nodes, 3 visible images without alt, 17 visible empty-alt images, and embedded Yotpo price/currency attributes; source role: page DOM inspection; independence key: first-party-target; limitation: empty alt may be intentional decoration and widget currency may be base currency.

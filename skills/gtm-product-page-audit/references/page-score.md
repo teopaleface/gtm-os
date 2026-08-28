@@ -56,6 +56,20 @@ Mark a numeric score `provisional` when coverage is below 80%. A score is a
 prioritization aid, not a measured business outcome. A critical blocker keeps
 the page-readiness decision negative even when the arithmetic score is high.
 
+### Score display
+
+In the score report and human report, display a numeric overall score as a
+loaded 20-segment meter followed by the exact percentage:
+
+```text
+87/100 Strong [█████████████████░░░] 87%
+```
+
+Fill `round(score / 5)` segments with `█` and the rest with `░`. This visualizes
+page quality only; show coverage separately. If the score is `UNSCORABLE`, do
+not show an empty meter that could be mistaken for a score of zero. Print
+`UNSCORABLE` and the missing-evidence explanation instead.
+
 ## Rubric
 
 ### Conversion clarity and persuasion, 30 points

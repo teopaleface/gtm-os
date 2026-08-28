@@ -12,6 +12,10 @@ structured audit for a downstream agent, and a full score report with the
 category table and criterion ratings. The human report may summarize the
 audit, but it may not add a claim that is absent from it.
 
+Return all user-facing text and all three generated artifacts in English,
+regardless of the language used in the user's request. Preserve source excerpts
+in their original wording when precision matters.
+
 Read `../../references/evidence-policy.md` and
 `../../references/artifact-contract.md` before producing the result. Read
 `../../references/user-capabilities.md` before choosing a live source. Read
@@ -91,8 +95,8 @@ the user supplies no public product URL, write all three outputs with
 Apply this built-in unslop pass on every run. The skill must work even when no
 separate writing skill is installed.
 
-- Write in the language of the user's request. Keep source excerpts in their
-  original wording when precision matters.
+- Write the report in English. Keep source excerpts in their original wording
+  when precision matters.
 - Lead with the decision in plain language. Say what you would do and why.
 - Use concrete facts, short paragraphs, and a natural rhythm. Prefer "is" and
   "has" over inflated phrasing.
@@ -170,17 +174,36 @@ handoff, not as the human explanation.
 Write the full score detail to `product-page-score.md` beside the agent audit
 unless the prompt names a separate path. Include:
 
-1. `## Category scores`: a table with category name, weight, quality score
+1. Start with the title `# Product-page score`, then show one compact score
+   line in this form:
+
+   ```text
+   87/100 Strong [█████████████████░░░] 87%
+   ```
+
+   Use a 20-segment bar. Fill `round(overall score / 5)` segments with `█` and
+   the remainder with `░`; the numeric score and percentage must always remain
+   visible. The bar represents page quality, not audit coverage. On a numeric
+   score, follow it with a short line such as `Coverage 88%. No critical
+   blockers. SEO category is provisional.` Add a horizontal rule before the
+   category section. If the result is `UNSCORABLE`, do not render an apparently
+   empty quality bar; show `UNSCORABLE` and explain the missing evidence.
+2. `## Category scores`: a table with category name, weight, quality score
    (0 to 100), coverage, and the main finding for each category.
-2. `## Criterion ratings`: every assessed criterion with its weight, rating
+3. `## Criterion ratings`: every assessed criterion with its weight, rating
    (0 to 4, U, or NA), earned points, and a short evidence note. Cite one
    observation for every rating below 2 and every rating of 4. Briefly explain
    ratings of 2 or 3.
-3. `## Arithmetic`: the sums and formula line that reproduce the overall score
+4. `## Arithmetic`: the sums and formula line that reproduce the overall score
    and coverage from the criterion ratings.
 
 The score report is the only place the category table and criterion ratings
 appear. The agent audit's `## Page score` section references it by path.
+
+Use the same score line and loaded bar in the human report's `## Bottom line`
+when a numeric score exists, so the three artifacts agree. Keep the bar
+accessible by including the exact score and percentage in text; never use color
+or the bar alone to communicate the result.
 
 At the end of the Codex response, show the human-readable conclusion first,
 then name all three output paths and explain that the agent audit is the
