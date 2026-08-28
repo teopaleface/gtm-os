@@ -51,6 +51,10 @@ python3 scripts/validate_output.py evals/fixtures/valid-output.json
 python3 /path/to/skill-creator/scripts/quick_validate.py .
 ```
 
+For the complete release evidence, see [`docs/qa-report.md`](docs/qa-report.md).
+The OpenAI upload notes are in [`docs/openai-submission.md`](docs/openai-submission.md),
+and the standalone Skillathon run sheet is [`DEMO.md`](DEMO.md).
+
 ## Status
 
 This is an early public release. The workflow and contracts are usable now. Live data quality still depends on the sources and connectors available to the running Codex session.

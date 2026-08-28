@@ -23,8 +23,18 @@ The deterministic suite has five positive cases and three negative cases in `eva
 
 Positive cases cover a valid contract, deliberate evidence abstention, ticket blockers, score consistency, and a structured handoff. Negative cases cover an invalid citation, an uncited fact, and a `READY` output whose evidence score is below the release bar.
 
+## Preflight
+
+The detailed run log is [`docs/qa-report.md`](qa-report.md). It records the
+manifest validator, all 40 skill validators and smoke tests, the deterministic
+evals, the public-link checks, and the fresh-clone Skillathon run.
+
+The repository also contains the optional Skillathon package under
+`.agents/skills/`, `demo/`, `DEMO.md`, and `submission.json`. The OpenAI plugin
+manifest continues to load the production plugin skills from `skills/`.
+
 ## Submission state
 
 The package, public links, starter prompts, and eval assets are ready for the manual submission form. Directory publication still depends on the OpenAI review and the developer or business verification required by the submission process.
 
-See the official [plugin submission guide](https://developers.openai.com/plugins/deploy/submission) and [plugin building guide](https://learn.chatgpt.com/docs/build-plugins) for the current form and review requirements.
+See the official [plugin submission guide](https://developers.openai.com/plugins/deploy/submission) and [plugin building guide](https://developers.openai.com/plugins/build/plugins) for the current form and review requirements.
